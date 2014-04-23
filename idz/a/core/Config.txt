@@ -1,0 +1,9 @@
+#Adapters
+InputAdapter=FileInputAdapter
+OutputAdapter=FileOutputAdapter
+#Values
+inputFilePath=path://in/path
+inputSocket=0
+outputFilePath=path://out/path
+#Query
+BatchSize=10
