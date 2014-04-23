@@ -15,5 +15,4 @@ public class FileInputAdapter implements InputAdapter {
 	public void connectToQueueManager(QueueManager queue) {
 		
 	}
-	
 }
