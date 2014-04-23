@@ -1,4 +1,4 @@
-package input.methods;
+package idz.a.input;
 
 import javax.security.auth.login.Configuration;
 

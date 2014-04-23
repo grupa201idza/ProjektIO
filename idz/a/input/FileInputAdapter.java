@@ -1,4 +1,4 @@
-package adapter.input.file;
+package idz.a.input;
 
 import javax.security.auth.login.Configuration;
 import input.methods.InputAdapter;
