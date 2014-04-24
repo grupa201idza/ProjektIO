@@ -1,5 +1,7 @@
 package idz.a.input;
 
+import javax.security.auth.login.Configuration;
+
 
 public class SocketInputAdapter implements InputAdapter, Runnable{
 
@@ -11,13 +13,16 @@ public class SocketInputAdapter implements InputAdapter, Runnable{
 	}
 
 	public void setupConfig(Configuration config) {
-		// TODO Auto-generated method stub
 		this.config = config;
 	}
 
 	public void connectToQueueManager(QueueManager queue) {
-		// TODO Auto-generated method stub
 		this.queue = queue;
+		
+	}
+
+	@Override
+	public void setupConfig(Configuration config) {
 		
 	}
 
