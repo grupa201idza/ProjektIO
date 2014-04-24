@@ -1,6 +1,7 @@
 package idz.a.input;
 
-import javax.security.auth.login.Configuration;
+import idz.a.core.Configuration;
+import idz.a.core.QueueManager;
 
 public interface InputAdapter {
 
