@@ -29,6 +29,7 @@ public class Configuration {
 			outputFilePath=prop.getProperty("outputFilePath");
 			batchSize=Integer.parseInt(prop.getProperty("BatchSize"));
 			inputSocket=Integer.parseInt(prop.getProperty("inputSocket"));
+		
 			
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -43,34 +44,28 @@ public class Configuration {
 		}
 	}
 	
-  public static String getInputAdapter() {
+  public String getInputAdapter() {
 		return inputAdapter;
 	}
 
-	public static String getOutputAdapter() {
+	public String getOutputAdapter() {
 		return outputAdapter;
 	}
 
-	public static String getInputFilePath() {
+	public String getInputFilePath() {
 		return inputFilePath;
 	}
 
-	public static String getOutputFilePath() {
+	public String getOutputFilePath() {
 		return outputFilePath;
 	}
 
-	public static int getInputSocket() {
+	public int getInputSocket() {
 		return inputSocket;
 	}
 
-	public static int getBatchSize() {
+	public int getBatchSize() {
 		return batchSize;
 	}
 
-public static void main(String[] args) {
- 
-	  new Configuration("src/idz/a/core/Config.txt");
-	  //System.out.println(getInputAdapter()); //TEST
-	  //System.out.println(getBatchSize()); //TEST
-  }
 }

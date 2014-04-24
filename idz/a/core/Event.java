@@ -4,6 +4,12 @@ import java.sql.Timestamp;
 
 public class Event {
 	
+	public Event(Timestamp ts, String det, LogLevel ll){
+		timestamp=ts;
+		details=det;
+		loglevel=ll;
+	}
+	
 private Timestamp timestamp;
 private String details;
 private LogLevel loglevel;
@@ -37,8 +43,4 @@ public LogLevel getLoglevel() {
 public void setLoglevel(LogLevel loglevel) {
 	this.loglevel = loglevel;
 }
-
-public static void main(String[] args) {
-}
-
 }
