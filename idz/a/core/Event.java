@@ -43,4 +43,32 @@ public LogLevel getLoglevel() {
 public void setLoglevel(LogLevel loglevel) {
 	this.loglevel = loglevel;
 }
+
+/*
+ * Function for manual Event Objects tests and listings for Output Adapter
+ * tests, may be used in other occasions The reason of creation is
+ * restrictec visibility of enum LogLevel thus problemswith creating new
+ * LogLevels with no example Events with those states
+ */
+
+public void setLogLevel(String level) throws ForeseenException {
+	switch (level) {
+	case "INFO":
+		this.loglevel = LogLevel.INFO;
+		break;
+	case "WARNING":
+		this.loglevel = LogLevel.WARNING;
+		break;
+	case "ERROR":
+		this.loglevel = LogLevel.ERROR;
+		break;
+	case "SEVERE":
+		this.loglevel = LogLevel.SEVERE;
+		break;
+	default:
+		throw new ForeseenException(
+				"Called logLevel not defined in setLogLevel by integer");
+
+	}
+}
 }
