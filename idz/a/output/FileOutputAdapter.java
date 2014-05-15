@@ -21,8 +21,12 @@ import idz.a.core.ForeseenException;
  */
 public class FileOutputAdapter implements OutputAdapter {
 
-	String outputFilePath;
+	private String outputFilePath;
 
+	FileOutputAdapter(Configuration config){
+		setupConfig(config);
+	}
+	
 	/*
 	 * Applies valid configuration
 	 */
