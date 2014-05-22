@@ -20,14 +20,18 @@ public class DBOutputAdapter implements OutputAdapter {
 
 	@Override
 	public void setupConfig(Configuration config) {
-		login = config.getDBLogin();
+		/*login = config.getDBLogin();
 		password = config.getDBPassword();
 		port = config.getDBPort();
 		url = config.getDBUrl();
-		table = config.getDBTable();
+		table = config.getDBTable();*/
 		
 	}
-
+	
+	boolean connectToSource(){
+		return false;
+	}
+	
 	@Override
 	public boolean storeEvents(List batch) {
 		// JDBC methods
