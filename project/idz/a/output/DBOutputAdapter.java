@@ -15,7 +15,7 @@ import idz.a.core.Event;
 
 public class DBOutputAdapter implements OutputAdapter {
 
-	private int port = 50000;
+	private int port;
 	private String dbName;
 	private String login;
 	private String password;
@@ -55,7 +55,7 @@ public class DBOutputAdapter implements OutputAdapter {
 				}
 				
 				try {
-					int[] records = stmt.executeBatch();
+					stmt.executeBatch();
 					System.out.println(batch.size() + " records added to database.");
 				} catch (SQLException e) {
 					e.printStackTrace();
