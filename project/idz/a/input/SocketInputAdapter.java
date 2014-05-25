@@ -24,7 +24,7 @@ public class SocketInputAdapter implements InputAdapter, Runnable{
 			try {
 				serverSocket = new ServerSocket(config.port);
 			} catch (IOException e) {
-				System.out.println("B³¹d przy tworzeniu gniazda serwerowego");
+				System.out.println("Blad przy tworzeniu gniazda serwerowego");
 				System.exit(-1);
 			}
 			
@@ -33,7 +33,7 @@ public class SocketInputAdapter implements InputAdapter, Runnable{
 				try {
 					socket = serverSocket.accept();
 				} catch (IOException e) {
-					System.out.println("B³¹d wejœcia-wyjœcia");
+					System.out.println("Blad wejscia-wyjscia");
 				}
 				new Thread(new SocketInputThread(socket, queue)).start();
 			}
