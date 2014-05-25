@@ -2,28 +2,40 @@ package idz.a.core;
 
 import java.util.*;
 
+import idz.a.core.AppCore;
+import idz.a.output.OutputAdapter;
+
 public class QueueManager {
 
-	private int batchSize=0;
+	private int batchSize = 0;
 	private static List<Event> queue = new ArrayList<Event>();
-	
-	public QueueManager(){
-		
+
+	OutputAdapter output;
+
+	public void connectOutputAdapter() {
+		output = AppCore.out;
 	}
-	
-	public boolean acceptEvent(Event event){
-		return true;
+
+	public boolean acceptEvent(Event event) {
+		if (currentSize() < batchSize)
+			return true;
+		else
+			return false;
 	}
-	
-	 public boolean sendEvents(){
-		 return true;
-	 }
-	
-	 void removeEvents(){
-		 queue.remove(0);
-	 }
-	 
-	 public int currentSize(){
-		 return batchSize;
-	 }
+
+	public boolean sendEvents() {
+		if (output.storeEvents(queue)) {
+			removeEvents();
+			return true;
+		} else
+			return false;
+	}
+
+	void removeEvents() {
+		queue.remove(0);
+	}
+
+	public int currentSize() {
+		return queue.size();
+	}
 }
