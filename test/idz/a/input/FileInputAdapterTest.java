@@ -11,4 +11,8 @@ public class FileInputAdapterTest {
 		fail("Not yet implemented");
 	}
 
+
+	public void crashTestRepo() {
+		
+	}
 }
