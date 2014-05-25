@@ -2,8 +2,8 @@ package idz.a.input;
 
 import java.io.BufferedReader;
 import java.io.File;
-
 import idz.a.core.Configuration;
+import idz.a.core.Event;
 import idz.a.core.QueueManager;
 
 
@@ -14,9 +14,21 @@ public class FileInputAdapter implements InputAdapter {
 	File inputFile;
 	BufferedReader in;
 	
-	FileInputAdapter() {
+	FileInputAdapter(Configuration config, QueueManager queue) {
 		setupConfig(config);
 		connectToQueueManager(queue);
+	}
+
+	String getLog() {
+		return null;
+	}
+	
+	Event parseEvent(String log) {
+		return null;
+	}
+	
+	void addEvent(Event log) {
+		System.out.println("There an event will be added - test");
 	}
 	
 	@Override
