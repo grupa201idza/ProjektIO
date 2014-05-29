@@ -17,9 +17,10 @@ public class QueueManager {
 	}
 
 	public boolean acceptEvent(Event event) {
-		if (currentSize() < batchSize)
+		if (currentSize() < batchSize) {
+			queue.add(event);
 			return true;
-		else
+		} else
 			return false;
 	}
 

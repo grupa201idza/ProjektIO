@@ -15,7 +15,7 @@ public class Event {
 	private Enum.LogLevel loglevel;
 
 	public static class Enum {
-		private enum LogLevel {
+		public enum LogLevel {
 			INFO, WARNING, ERROR, SEVERE
 		};
 	}
