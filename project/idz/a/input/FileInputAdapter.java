@@ -18,80 +18,104 @@ import idz.a.core.QueueManager;
 
 public class FileInputAdapter implements InputAdapter {
 
-	Configuration config;
-	QueueManager queue;
-	//File inputFile = new File("D:\\test.txt");
-	static String logFile = new String("D:\\server.log.1.txt"); // roboczy path
-	BufferedReader in;
-	FileReader fileRead;
-	Path filePath;
+	private Configuration config;
+	private QueueManager queue;
+	private String logFile = new String("D:\\server.log.1.txt"); // roboczy path
+	private String logPath;
 	private final static Charset ENCODING = StandardCharsets.UTF_8;
+	Event event;
 	
-	FileInputAdapter(String in) {
+	public FileInputAdapter() {
 		super();
 	}
 	
-	FileInputAdapter(Configuration config, QueueManager queue) {
+	/** Constructor */
+	public FileInputAdapter(Configuration config, QueueManager queue) {
 		setupConfig(config);
 		connectToQueueManager(queue);
+		logPath = config.getInputFilePath();
+		
 	}
 	
-	/** @param fileName full name of an existing, readable file */
-	Path getPath(String fileName) {
+	/** Method returning Path from given String path
+	 *  @param fileName - full name of an existing, readable file */
+	private Path getPath(String fileName) {
 	    return Paths.get(fileName);
 	}
 	
-	/** Method for processing log file line by line  */
-	private void processLineByLine() throws IOException {
-		Scanner scanner =  new Scanner(getPath(logFile), ENCODING.name());
-		while (scanner.hasNextLine()){
-			parseEvent(scanner.nextLine());
+	/** Method checking if given log file path exists */
+	private boolean connectToSource() {
+		int connectionAttempts = 0;
+		while (connectionAttempts < 5) {
+			try {
+				Scanner sc = new Scanner(getPath(logFile), ENCODING.name());
+				sc.close();
+			} catch (IOException e) {
+				System.out.println("Attempting to connect to source");
+				connectionAttempts++;
+				continue;
+			}
+			return true;
 		}
-		scanner.close();
+		return false;
 	}
 	
-	/** Method for parsing each line's content
+	/** Method processing log file line by line 
+	 * @throws IOException - Exception caught in connectToSource() */
+	private void processLogFile() throws IOException {
+		if (connectToSource()) {
+			Scanner scanner =  new Scanner(getPath(logFile), ENCODING.name());
+			// any log left? is there space in queue?
+			while (scanner.hasNextLine() && queue.currentSize() < queue.batchSize){
+				event = parseEvent(scanner.nextLine());
+				if (!event.equals(null)) {
+					queue.acceptEvent(event);
+				}
+				else continue;
+			}
+			scanner.close();
+		}
+		else {
+			System.err.println("Log source not found!");
+			System.exit(1);
+		}
+	}
+	
+	/** Method for parsing line's content to Event
 	 *  @param log - scanned line from log file */
-	private void parseEvent(String log){
+	private Event parseEvent(String log){
 		Scanner scanner = new Scanner(log);
 		scanner.useDelimiter(" ");
 		if (scanner.hasNext()){
 			String date = scanner.next();
-			System.out.println(timeFormat(date));
 			Timestamp ts = Timestamp.valueOf(timeFormat(date));
 			System.out.println("Timestamp: " +ts);
 			
 			String level = scanner.next();
-			System.out.println(level);
+			Event.Enum.LogLevel loglvl = Event.Enum.LogLevel.valueOf(level);
+			System.out.println(loglvl);
 			
 			String detail = new String();
 			while (scanner.hasNext()) {
 				detail = detail.concat(" " +scanner.next());
 			}
+			detail = detail.trim();
 			System.out.println("Detail: " +detail.trim());
+			
+			scanner.close();
+			return new Event(ts, detail, loglvl);
 		}
 		else {
 			System.out.println("Empty or invalid line. Unable to process.");
+			scanner.close();
+			return null;
 	    }
-		scanner.close();
 	}
 	
 	/** Method formating log date
 	 *  @param in - date to format */
 	private String timeFormat (String in) {
 		return in.replace("(", "").replace(")","").replace("T", " ");
-	}
-	
-	String getLog() {
-		return null;
-	}
-	
-//	Event parseEvent(String log) {
-//		return null;
-//	}
-	
-	void addEvent(Event log) {
-		System.out.println("There an event will be added - test");
 	}
 	
 	@Override
@@ -106,7 +130,7 @@ public class FileInputAdapter implements InputAdapter {
 	
 	
 	public static void main(String[] args) throws IOException {
-		FileInputAdapter f = new FileInputAdapter(logFile);
-		f.processLineByLine();
+		FileInputAdapter f = new FileInputAdapter();
+		f.processLogFile();
 	}
 }
