@@ -1,47 +1,104 @@
 package idz.a.input;
 
 import javax.security.auth.login.Configuration;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.ServerSocket;
+import java.io.InputStreamReader;
 import java.net.Socket;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public class SocketInputAdapter implements InputAdapter, Runnable{
+public class SocketInputAdapter implements InputAdapter{
 
-	Thread thread;
 	Configuration config;
 	QueueManager queue;
-	boolean running = false;
+	Socket socket;
 	
-	public SocketInputAdapter(){
-		
-		thread = new Thread(this);
-		thread.start();
+	public SocketInputAdapter(Socket socket, QueueManager queue)
+	{
+		this.socket = socket;
+		this.queue = queue;
 	}
 	
-	public void run() {
-			ServerSocket serverSocket = null;
-			Socket socket = null;
-			if (!running){			
+	private void parseEvent(String line){
+		
+		String tDate;
+		String tTime;
+		String tLevel;
+		String tDetails = null;
+		Timestamp timestamp = null;
+		Event.Enum.LogLevel logLevel = null;
+		Event event = null;
+		
+		if (line.length()>=32)
+		{
+			tDate = line.substring(1, 11);
+			tTime = line.substring(12, 25);
+			tDate = tDate + " " + tTime;
+			
+			
+			DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 			try {
-					serverSocket = new ServerSocket(config.inputSocket);
-			} catch (IOException e) {
-				System.out.println("Blad przy tworzeniu gniazda serwerowego");
-				System.exit(-1);
+				Date parsedDate = formatter.parse(tDate);
+				timestamp = new Timestamp(parsedDate.getTime());
+			} catch (ParseException e) {
+				return;
 			}
 			
+			tLevel = line.substring(27, 28);
 			
-			while (true){
-				try {
-					socket = serverSocket.accept();
-					running = true;
-				} catch (IOException e) {
-					running = false;
-					System.out.println("Blad wejscia-wyjscia");
-				}
-				new Thread(new SocketInputThread(socket, queue)).start();
+			switch (tLevel) {
+			case "I": 
+				logLevel = Event.Enum.LogLevel.INFO;
+				tDetails = line.substring(32);
+				break;
+			case "W": 
+				logLevel = Event.Enum.LogLevel.WARNING;
+				tDetails = line.substring(35);
+				break;
+			case "E": 
+				logLevel = Event.Enum.LogLevel.ERROR;
+				tDetails = line.substring(33);
+				break;
+			case "S": 
+				logLevel = Event.Enum.LogLevel.SEVERE;
+				tDetails = line.substring(34);
+				break;
 			}
+			event = new Event(timestamp, tDetails, logLevel);
+			if (queue.acceptEvent(event))
+				System.out.println("Added to queue.");
+			else
+				System.out.println("Not added to queue.");
+		}
+	}
+	
+	public void start() {
+		
+		BufferedReader brinp = null;
+		
+		try {
+			brinp = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		} catch (IOException e) {
+			System.out.println("Blad przy tworzeniu strumienia " + e);
+		}
+		String line = null;
+		
+		while(true){
+		try{
+			line = brinp.readLine();
+			if (line != null){
+				parseEvent(line);
 			}
-			
+		}
+		catch (IOException e){
+			System.out.println("Blad wejscia-wyjscia");
+			return;
+		}
+		}
 	}
 
 	public void setupConfig(Configuration config) {
