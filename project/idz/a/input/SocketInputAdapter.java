@@ -23,7 +23,7 @@ public class SocketInputAdapter implements InputAdapter{
 		this.queue = queue;
 	}
 	
-	private void parseEvent(String line){
+	private void parseEvent(String log){
 		
 		String tDate;
 		String tTime;
@@ -33,10 +33,10 @@ public class SocketInputAdapter implements InputAdapter{
 		Event.Enum.LogLevel logLevel = null;
 		Event event = null;
 		
-		if (line.length()>=32)
+		if (log.length()>=32)
 		{
-			tDate = line.substring(1, 11);
-			tTime = line.substring(12, 25);
+			tDate = log.substring(1, 11);
+			tTime = log.substring(12, 25);
 			tDate = tDate + " " + tTime;
 			
 			
@@ -48,24 +48,24 @@ public class SocketInputAdapter implements InputAdapter{
 				return;
 			}
 			
-			tLevel = line.substring(27, 28);
+			tLevel = log.substring(27, 28);
 			
 			switch (tLevel) {
 			case "I": 
 				logLevel = Event.Enum.LogLevel.INFO;
-				tDetails = line.substring(32);
+				tDetails = log.substring(32);
 				break;
 			case "W": 
 				logLevel = Event.Enum.LogLevel.WARNING;
-				tDetails = line.substring(35);
+				tDetails = log.substring(35);
 				break;
 			case "E": 
 				logLevel = Event.Enum.LogLevel.ERROR;
-				tDetails = line.substring(33);
+				tDetails = log.substring(33);
 				break;
 			case "S": 
 				logLevel = Event.Enum.LogLevel.SEVERE;
-				tDetails = line.substring(34);
+				tDetails = log.substring(34);
 				break;
 			}
 			event = new Event(timestamp, tDetails, logLevel);
