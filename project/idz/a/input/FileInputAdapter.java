@@ -12,126 +12,206 @@ import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.util.Scanner;
 
-
+/**
+ * FileInputAdapter class.
+ *
+ * @author Przemyslaw Springer
+ */
 public class FileInputAdapter implements InputAdapter {
 
 	private Configuration config;
 	private QueueManager queue;
 	private String logPath;
-	private final static Charset ENCODING = StandardCharsets.UTF_8;
+	private static final Charset ENCODING = StandardCharsets.UTF_8;
+	private static final int connectionAmount = 5;
 	private Event event;
-	
+
+	/** Initializes new FileInputAdapter object. */
 	public FileInputAdapter() {
 		super();
 	}
-	
-	/** Constructor of FileInputAdapter */
-	public FileInputAdapter(Configuration config, QueueManager queue) {
-		setupConfig(config);
-		connectToQueueManager(queue);
+
+	/**
+	 * Constructs FileInputAdapter that reads logs from file.
+	 *
+	 * @param configCon
+	 *            Configuration object
+	 * @param queueMan
+	 *            QueueManager object
+	 */
+	public FileInputAdapter(final Configuration configCon,
+			final QueueManager queueMan) {
+		setupConfig(configCon);
+		connectToQueueManager(queueMan);
 		logPath = Configuration.getInputFilePath();
-		
 	}
-	
-	/** Method returning Path from given String path
-	 *  @param fileName full name of an existing, readable file */
-	private Path getPath(String fileName) {
-	    return Paths.get(fileName);
+
+	/**
+	 * Returns Path from given String path.
+	 *
+	 * @param fileName
+	 *            full name of an existing, readable file
+	 * @return resulting Path from given String
+	 */
+	private Path getPath(final String fileName) {
+		return Paths.get(fileName);
 	}
-	
-	/** Method checking if given log file path exists */
+
+	/**
+	 * Checks if given log file path exists.
+	 *
+	 * @return true if connected to source; false if not connected to source
+	 */
 	private boolean connectToSource() {
-		int connectionAttempts = 0;
-		while (connectionAttempts < 5) {
+		int connAttempts = 0;
+		while (connAttempts < connectionAmount) {
 			try {
-				Scanner sc = new Scanner(getPath(logPath), ENCODING.name());
-				sc.close();
+				final Scanner scanner = new Scanner(
+						getPath(logPath), ENCODING.name());
+				closeScanner(scanner);
 			} catch (IOException e) {
-				System.out.println("Attempting to connect to source");
-				connectionAttempts++;
+				System.out.println("Attempting to connect"
+						+ "to source");
+				connAttempts++;
 				continue;
 			}
-			return true;
 		}
-		return false;
+		return connAttempts < connectionAmount;
 	}
-	
-	/** Method processing log file line by line 
-	 * @throws IOException Exception caught in connectToSource() */
-	private void processLogFile() throws IOException {
+
+	/**
+	 * Processes log file line by line.
+	 *
+	 * @throws IOException
+	 *             Exception caught in connectToSource()
+	 */
+	public final void processLogFile() throws IOException {
+//		Scanner scanner;
 		if (connectToSource()) {
-			Scanner scanner =  new Scanner(getPath(logPath), ENCODING.name());
+			final Scanner scanner = new Scanner(getPath(logPath),
+					ENCODING.name());
 			// any log left? is there space in queue?
-			while (scanner.hasNextLine() && queue.currentSize() < Configuration.getBatchSize()){
+			while (scanner.hasNextLine()
+					&& queue.currentSize()
+					< Configuration.getBatchSize()) {
 				event = parseEvent(scanner.nextLine());
-				if (!event.equals(null) && !event.getTimestamp().equals(null) && !event.getDetails().equals(null) && !event.getLoglevel().equals(null)) {
+				if (!event.equals(null)
+						&& !event.getTimestamp().equals(null)
+						&& !event.getDetails().equals(null)
+						&& !event.getLoglevel().equals(null)) {
 					queue.acceptEvent(event);
+				} else {
+					continue;
 				}
-				else continue;
 			}
-			scanner.close();
-		}
-		else {
+			closeScanner(scanner);
+		} else {
 			System.err.println("Log source not found!");
-			System.exit(1);
 		}
 	}
-	
-	/** Method for parsing line's content to Event
-	 *  @param log scanned line from log file */
-	public Event parseEvent(String log){
-		Scanner scanner = new Scanner(log);
+
+	/**
+	 * Parses line's content to Event.
+	 *
+	 * @param log
+	 *            scanned line from log file
+	 * @return parsed Event object
+	 * or null if meets empty or invalid line in log file
+	 */
+	public final Event parseEvent(final String log) {
+		final Scanner scanner = new Scanner(log);
 		scanner.useDelimiter(" ");
-		if (scanner.hasNext()){
-			Event event = new Event(null, null, null);
+		if (scanner.hasNext()) {
+			Event evt = new Event(null, null, null);
 			try {
-				String date = scanner.next();
-				event.setTimestamp(Timestamp.valueOf(timeFormat(date)));
+				final String date = scanner.next();
+				evt.setTimestamp(Timestamp
+						.valueOf(dateTrim(dateReplace(date))));
 			} catch (IllegalArgumentException e) {
 				System.err.println("Wrong Timestamp");
-				event.setTimestamp(null);
+				evt.setTimestamp(null);
 			}
-			
+
 			try {
-				String level = scanner.next();
-				event.setLoglevel(Event.Enum.LogLevel.valueOf(level));;
+				final String level = scanner.next();
+				evt.setLoglevel(
+						Event.Enum.LogLevel.valueOf(level));
 			} catch (IllegalArgumentException e) {
 				System.err.println("Wrong Loglevel");
-				event.setLoglevel(null);
+				evt.setLoglevel(null);
 			}
-			
+
 			try {
 				String detail = new String();
 				while (scanner.hasNext()) {
-					detail = detail.concat(" " +scanner.next());
+					detail = detail.concat(" " + scanner.next());
 				}
-				event.setDetails(detail.trim());
+				evt.setDetails(detail.trim());
 			} catch (IllegalArgumentException e) {
 				System.err.println("Wrong Detail");
-				event.setDetails(null);
+				evt.setDetails(null);
 			}
-			scanner.close();
-			return event;
-		}
-		else {
-			System.out.println("Empty or invalid line. Unable to process.");
-			scanner.close();
+			closeScanner(scanner);
+			return evt;
+		} else {
+			System.out.println("Empty or invalid line."
+					+ "Unable to process.");
+			closeScanner(scanner);
 			return null;
-	    }
+		}
 	}
-	
-	/** Method formating log date
-	 *  @param in date to format */
-	private String timeFormat (String in) {
-		return in.replace("(", "").replace(")","").replace("T", " ");
+
+	/**
+	 * Formats given String log date.
+	 *
+	 * @param logDate
+	 *            String date to format
+	 * @return date in format compatible with Timestamp
+	 */
+	private String dateReplace(final String logDate) {
+		return logDate.replaceAll("[(T)]", " ");
 	}
-	
-	public void setupConfig(Configuration config) {
-		this.config = config;
+
+	/**
+	 * Trims formated date.
+	 *
+	 * @param logDate
+	 *            date to trim
+	 * @return trimmed log date
+	 */
+	private String dateTrim(final String logDate) {
+		return logDate.trim();
 	}
-	
-	public void connectToQueueManager(QueueManager queue) {
-		this.queue = queue;
+
+	/**
+	 * Closes Scanner object.
+	 *
+	 * @param scan
+	 * 			  Scanner object to close
+	 *
+	 */
+	private void closeScanner(final Scanner scan) {
+		scan.close();
+	}
+
+	/**
+	 * Setups Configuration object.
+	 *
+	 * @param configCon
+	 *            Configuration object
+	 */
+	public final void setupConfig(final Configuration configCon) {
+		this.config = configCon;
+	}
+
+	/**
+	 * Setups QueueManager object.
+	 *
+	 * @param queueMan
+	 *            QueueManager object
+	 */
+	public final void connectToQueueManager(final QueueManager queueMan) {
+		this.queue = queueMan;
 	}
 
 }
