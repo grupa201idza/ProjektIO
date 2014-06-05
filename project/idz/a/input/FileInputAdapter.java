@@ -25,25 +25,23 @@ public class FileInputAdapter implements InputAdapter {
 	private static final Charset ENCODING = StandardCharsets.UTF_8;
 	private static final int connectionAmount = 5;
 	private Event event;
-
-	/** Initializes new FileInputAdapter object. */
-	public FileInputAdapter() {
-		super();
-	}
+	private Scanner scanner;
+	private boolean isConnected;
 
 	/**
-	 * Constructs FileInputAdapter that reads logs from file.
-	 *
-	 * @param configCon
-	 *            Configuration object
-	 * @param queueMan
-	 *            QueueManager object
+	 * Initializes new FileInputAdapter object.
 	 */
-	public FileInputAdapter(final Configuration configCon,
-			final QueueManager queueMan) {
-		setupConfig(configCon);
-		connectToQueueManager(queueMan);
+	public FileInputAdapter() {
 		logPath = Configuration.getInputFilePath();
+		isConnected = connectToSource();
+	}
+
+	/** FileInputAdapter constructor for testing
+	 * 		purposes.
+	 * @param test garbage parameter
+	 */
+	public FileInputAdapter(final int test) {
+		super();
 	}
 
 	/**
@@ -66,12 +64,12 @@ public class FileInputAdapter implements InputAdapter {
 		int connAttempts = 0;
 		while (connAttempts < connectionAmount) {
 			try {
-				final Scanner scanner = new Scanner(
-						getPath(logPath), ENCODING.name());
-				closeScanner(scanner);
+				scanner = new Scanner(getPath(logPath),
+						ENCODING.name());
+				break;
 			} catch (IOException e) {
 				System.out.println("Attempting to connect"
-						+ "to source");
+						+ " to source");
 				connAttempts++;
 				continue;
 			}
@@ -87,24 +85,26 @@ public class FileInputAdapter implements InputAdapter {
 	 */
 	public final void processLogFile() throws IOException {
 //		Scanner scanner;
-		if (connectToSource()) {
-			final Scanner scanner = new Scanner(getPath(logPath),
-					ENCODING.name());
-			// any log left? is there space in queue?
-			while (scanner.hasNextLine()
+		if (isConnected) {
+			if (scanner.hasNextLine()
 					&& queue.currentSize()
 					< Configuration.getBatchSize()) {
 				event = parseEvent(scanner.nextLine());
 				if (!event.equals(null)
-						&& !event.getTimestamp().equals(null)
-						&& !event.getDetails().equals(null)
-						&& !event.getLoglevel().equals(null)) {
+						&& !event.getTimestamp().equals(
+								null)
+						&& !event.getDetails().equals(
+								null)
+						&& !event.getLoglevel().equals(
+								null)) {
 					queue.acceptEvent(event);
 				} else {
-					continue;
+					System.out.println(
+							"Unprocessable line");
 				}
+			} else {
+				closeScanner(scanner);
 			}
-			closeScanner(scanner);
 		} else {
 			System.err.println("Log source not found!");
 		}
@@ -119,23 +119,25 @@ public class FileInputAdapter implements InputAdapter {
 	 * or null if meets empty or invalid line in log file
 	 */
 	public final Event parseEvent(final String log) {
-		final Scanner scanner = new Scanner(log);
-		scanner.useDelimiter(" ");
-		if (scanner.hasNext()) {
+		final Scanner scan = new Scanner(log);
+		scan.useDelimiter(" ");
+		if (scan.hasNext()) {
 			Event evt = new Event(null, null, null);
 			try {
-				final String date = scanner.next();
+				final String date = scan.next();
 				evt.setTimestamp(Timestamp
-						.valueOf(dateTrim(dateReplace(date))));
+						.valueOf(dateTrim(dateReplace(
+								date))));
 			} catch (IllegalArgumentException e) {
 				System.err.println("Wrong Timestamp");
 				evt.setTimestamp(null);
 			}
 
 			try {
-				final String level = scanner.next();
+				final String level = scan.next();
 				evt.setLoglevel(
-						Event.Enum.LogLevel.valueOf(level));
+						Event.Enum.LogLevel.valueOf(
+								level));
 			} catch (IllegalArgumentException e) {
 				System.err.println("Wrong Loglevel");
 				evt.setLoglevel(null);
@@ -143,20 +145,21 @@ public class FileInputAdapter implements InputAdapter {
 
 			try {
 				String detail = new String();
-				while (scanner.hasNext()) {
-					detail = detail.concat(" " + scanner.next());
+				while (scan.hasNext()) {
+					detail = detail.concat(
+							" " + scan.next());
 				}
 				evt.setDetails(detail.trim());
 			} catch (IllegalArgumentException e) {
 				System.err.println("Wrong Detail");
 				evt.setDetails(null);
 			}
-			closeScanner(scanner);
+			closeScanner(scan);
 			return evt;
 		} else {
 			System.out.println("Empty or invalid line."
 					+ "Unable to process.");
-			closeScanner(scanner);
+			closeScanner(scan);
 			return null;
 		}
 	}
