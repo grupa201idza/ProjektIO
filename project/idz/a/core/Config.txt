@@ -1,6 +1,6 @@
 #1. ADAPTERS
 InputAdapter=FileInputAdapter
-OutputAdapter=FileOutputAdapter
+OutputAdapter=DBOutputAdapter
 #2. VALUES
 inputFilePath=server.log.1
 inputSocket=0
@@ -9,7 +9,7 @@ outputFilePath=path://out/path
 DBLogin=login
 DBPassword=password
 DBPort=0
-DBUrl=0.0.0.0
+DBName=name
 DBTable=table
 #3. QUERY
 BatchSize=10

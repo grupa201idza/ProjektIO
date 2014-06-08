@@ -9,7 +9,7 @@ import java.util.Properties;
 public class Configuration {
 
 	private static String inputAdapter, outputAdapter, inputFilePath,
-			outputFilePath, inputURL, DBLogin, DBPassword, DBUrl, DBTable;
+			outputFilePath, inputURL, DBLogin, DBPassword, DBName, DBTable;
 	private static int inputSocket, batchSize, DBPort;
 	Properties prop = new Properties();
 	InputStream input = null;
@@ -32,7 +32,7 @@ public class Configuration {
 			DBLogin = prop.getProperty("DBLogin");
 			DBPassword = prop.getProperty("DBPassword");
 			DBPort = Integer.parseInt(prop.getProperty("DBPort"));
-			DBUrl = prop.getProperty("DBUrl");
+			DBName = prop.getProperty("DBName");
 			DBTable = prop.getProperty("DBTable");
 
 		} catch (IOException ex) {
@@ -84,8 +84,8 @@ public class Configuration {
 		return DBPassword;
 	}
 
-	public static String getDBUrl() {
-		return DBUrl;
+	public static String getDBName() {
+		return DBName;
 	}
 
 	public static String getDBTable() {
