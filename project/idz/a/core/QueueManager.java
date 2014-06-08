@@ -5,12 +5,21 @@ import java.util.*;
 import idz.a.core.AppCore;
 import idz.a.output.OutputAdapter;
 
+/**
+ * @author Bartosz Domin
+ * 
+ */
+
 public class QueueManager {
 
 	private int batchSize = 0;
 	private static List<Event> queue = new ArrayList<Event>();
 
 	OutputAdapter output;
+
+	public QueueManager() {
+		connectOutputAdapter();
+	}
 
 	public void connectOutputAdapter() {
 		output = AppCore.out;
@@ -32,7 +41,7 @@ public class QueueManager {
 			return false;
 	}
 
-	void removeEvents() {
+	private void removeEvents() {
 		queue.remove(0);
 	}
 

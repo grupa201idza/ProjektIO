@@ -6,6 +6,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * @author Bartosz Domin
+ * 
+ */
+
 public class Configuration {
 
 	private static String inputAdapter, outputAdapter, inputFilePath,

@@ -2,6 +2,11 @@ package idz.a.core;
 
 import java.sql.Timestamp;
 
+/**
+ * @author Bartosz Domin
+ * 
+ */
+
 public class Event {
 
 	public Event(Timestamp ts, String det, Enum.LogLevel ll) {

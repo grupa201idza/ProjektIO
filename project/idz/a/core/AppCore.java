@@ -3,6 +3,11 @@ package idz.a.core;
 import idz.a.input.InputAdapter;
 import idz.a.output.OutputAdapter;
 
+/**
+ * @author Bartosz Domin
+ * 
+ */
+
 public class AppCore {
 
 	static String configPath = "project/idz/a/core/Config.txt";
@@ -61,7 +66,7 @@ public class AppCore {
 		new AppCore(configPath);
 		setUp();
 		invokeAdapterMethods();
-		while(true){
+		while (true) {
 			in.readLog();
 			queue.sendEvents();
 		}
