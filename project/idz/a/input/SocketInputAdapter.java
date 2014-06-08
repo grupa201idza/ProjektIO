@@ -1,5 +1,8 @@
 package idz.a.input;
 
+import idz.a.core.Configuration;
+import idz.a.core.Event;
+import idz.a.core.QueueManager;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
