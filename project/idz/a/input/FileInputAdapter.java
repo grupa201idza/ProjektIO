@@ -78,12 +78,9 @@ public class FileInputAdapter implements InputAdapter {
 	}
 
 	/**
-	 * Processes log file line by line.
-	 *
-	 * @throws IOException
-	 *             Exception caught in connectToSource()
+	 * Reads log file line by line.
 	 */
-	public final void processLogFile() throws IOException {
+	public final void readLog() {
 //		Scanner scanner;
 		if (isConnected) {
 			if (scanner.hasNextLine()
