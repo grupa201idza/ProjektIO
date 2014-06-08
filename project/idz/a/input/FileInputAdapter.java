@@ -87,7 +87,7 @@ public class FileInputAdapter implements InputAdapter {
 					&& queue.currentSize()
 					< Configuration.getBatchSize()) {
 				event = parseEvent(scanner.nextLine());
-				if (!event.equals(null)
+				if (!(event==null)
 						&& !event.getTimestamp().equals(
 								null)
 						&& !event.getDetails().equals(
