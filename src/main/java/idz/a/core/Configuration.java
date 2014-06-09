@@ -15,7 +15,8 @@ public class dokumentacjaConfiguration{
 
 	/** 
 	 *@autor Kamil Klarecki 
-	 *  
+	 *  Klasa przechowuj¹ca dane konfiguracyjne dla
+	 *   adapterów wejœciowych i wyjœciowych oraz funkcjonowania programu
 	 *  */
 		
 	}
@@ -26,7 +27,20 @@ public class Configuration {
 	private static int inputSocket, batchSize, DBPort;
 	Properties prop = new Properties();
 	InputStream input = null;
+	
+	public class dokumentacjaConfiguration(String path){
 
+		/** 
+		 *@autor Kamil Klarecki 
+		 * Inicjalizacja instancji konfiguracji poprzez odwo³anie 
+		 *  siê do pliku znajduj¹cego siê na œcie¿ce przekazanej w 
+		 *  ³añcuchu jako parametr konstruktora
+		 *  Wykorzystanie klasê property do zebrania danych z pliku tekstowego
+		 *   przechowuj¹cego dane konfiguracyjne.
+		 *   W razie b³êdu zamyka kana³ wejœciowy pliku
+
+		  *  */
+			
 	public Configuration(String path) {
 
 		try {
@@ -60,19 +74,38 @@ public class Configuration {
 			}
 		}
 	}
+	
+	public class dokumentacjaString getInputAdapter()){
 
+		/** 
+		 *@autor Kamil Klarecki 
+		 *  Zwraca ³añcuch z nazw¹ wybranego adaptera wejœciowego
+		 *  */
 	public static String getInputAdapter() {
 		return inputAdapter;
 	}
+	public class dokumentacjaString getInputAdapter()){
 
+		/** 
+		 *@autor Kamil Klarecki 
+		 *  Zwraca ³añcuch z nazw¹ wybranego adaptera wyjœciowego
+		 *  */
 	public static String getOutputAdapter() {
 		return outputAdapter;
 	}
-
+	/** 
+	 *@autor Kamil Klarecki 
+	 *  Zwraca ³añcuch z œcie¿k¹ pliku dla adaptera wyjœciowego
+	 *  */
 	public static String getInputFilePath() {
 		return inputFilePath;
 	}
-
+	public class dokumentacja{
+	/** 
+	 *@autor Kamil Klarecki 
+	 *  Zwraca ³añcuch z œcie¿k¹ pliku dla adaptera wejœciowego
+	 *  */
+	}
 	public static String getOutputFilePath() {
 		return outputFilePath;
 	}
