@@ -12,7 +12,9 @@ public class dokumentacjaAppCore{
 
 /** 
  *@autor Kamil Klarecki 
- *  
+ *  Rdzeñ funkcjonalny aplikacji.
+ *  Przechowuje obiekty konfiguracji i adapterów.
+ *  Posiada ³añcuch œcie¿ki inicjalizuj¹cej.
  *  */
 	
 }
@@ -25,7 +27,19 @@ public class AppCore {
 	static QueueManager queue;
 	int batchSize = 0;
 	static String inputName, outputName;
+	
+public class dokumentacjaAppCore(String path){
 
+		/** 
+		 *@autor Kamil Klarecki 
+		 *  Konstruktor przyjmuj¹cy za parametr œciêzkê pliku incjalizucego 
+		 *  konfiguracji.
+		 *  Two¿y now¹ konfiguracje w oparciu o podan¹ scie¿kê.
+		 *  Na podstawie konfiguraci ustala rozmiar kolejki logów oraz wejœciowy i 
+		 *  wyjœciowy adapter wed³ug nazwy.
+		 *  */
+			
+		}
 	public AppCore(String path) {
 		conf = new Configuration(path);
 		batchSize = conf.getBatchSize();
@@ -37,7 +51,8 @@ public class AppCore {
 
 		/** 
 		 *@autor Kamil Klarecki 
-		 *  
+		 *  *  Tworzy obiekt adaptera implementuj¹cego interface 
+		 *  InputAdapter o zadanej nazwie
 		 *  */
 			
 		}
@@ -52,6 +67,17 @@ public class AppCore {
 			e.printStackTrace();
 		}
 	}
+	
+	public class dokumentacjaloadOutputAdapter{
+		
+
+		/** 
+		 *@autor Kamil Klarecki 
+		 *  *  Tworzy obiekt adaptera implementuj¹cego interface 
+		 * Output InputAdapter o zadanej nazwie
+		 *  */
+			
+		}
 
 	private static void loadOutputAdapter(String name) {
 
@@ -70,7 +96,8 @@ public class AppCore {
 
 		/** 
 		 *@autor Kamil Klarecki 
-		 *  
+		 *  Wyko¿ystuje metody ³aduj¹ce adapter wejœciowy i wyjsciowy 
+		 *  ze œcie¿ki o zadanej nazwie i powoduje now¹ instancjê menad¿era kolejki
 		 *  */
 			
 		}
@@ -84,7 +111,8 @@ public class dokumentacjainvokeAdapterMethods{
 
 		/** 
 		 *@autor Kamil Klarecki 
-		 *  
+		 *  Inicjalizuje pola adapter wyko¿ystuj¹c istniej¹c¹ konfiruracjê
+		 *  Do³¹cza obiekt menad¿era kolejki incjalizuje pola adaptera wyjœciowego
 		 *  */
 			
 		}
@@ -98,7 +126,9 @@ public class dokumentacjaMain{
 
 		/** 
 		 *@autor Kamil Klarecki 
-		 *  
+		 *  Tworzy obiekt ApCore
+		 *  Wywo³uje  setUp i invokeAdapterMethod
+		 *  oraz wcztuje logi w nieskoñczonej pêtli
 		 *  */
 			
 		}
