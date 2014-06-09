@@ -81,7 +81,6 @@ public class FileInputAdapter implements InputAdapter {
 	 * Reads log file line by line.
 	 */
 	public final void readLog() {
-//		Scanner scanner;
 		if (isConnected) {
 			if (scanner.hasNextLine()
 					&& queue.currentSize()
@@ -99,8 +98,6 @@ public class FileInputAdapter implements InputAdapter {
 					System.out.println(
 							"Unprocessable line");
 				}
-			} else {
-				closeScanner(scanner);
 			}
 		} else {
 			System.err.println("Log source not found!");
@@ -190,7 +187,7 @@ public class FileInputAdapter implements InputAdapter {
 	 * 			  Scanner object to close
 	 *
 	 */
-	private void closeScanner(final Scanner scan) {
+	public void closeScanner(final Scanner scan) {
 		scan.close();
 	}
 
