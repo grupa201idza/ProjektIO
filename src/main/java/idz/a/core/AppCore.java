@@ -4,10 +4,18 @@ import idz.a.input.InputAdapter;
 import idz.a.output.OutputAdapter;
 
 /**
- * @author Bartosz Domin
+ * @author Bartosz Domin 
  * 
  */
+public class dokumentacjaAppCore{
+	
 
+/** 
+ *@autor Kamil Klarecki 
+ *  
+ *  */
+	
+}
 public class AppCore {
 
 	static String configPath = "project/idz/a/core/Config.txt";
@@ -24,7 +32,15 @@ public class AppCore {
 		inputName = conf.getInputAdapter();
 		outputName = conf.getOutputAdapter();
 	}
+	public class dokumentacjaloadInputAdapter{
+		
 
+		/** 
+		 *@autor Kamil Klarecki 
+		 *  
+		 *  */
+			
+		}
 	private static void loadInputAdapter(String name) {
 
 		try {
@@ -49,19 +65,43 @@ public class AppCore {
 		}
 
 	}
+	public class dokumentacjasetUp{
+		
 
+		/** 
+		 *@autor Kamil Klarecki 
+		 *  
+		 *  */
+			
+		}
 	private static void setUp() {
 		loadInputAdapter("idz.a.input." + inputName);
 		loadOutputAdapter("idz.a.output." + outputName);
 		queue = new QueueManager();
 	}
+public class dokumentacjainvokeAdapterMethods{
+		
 
+		/** 
+		 *@autor Kamil Klarecki 
+		 *  
+		 *  */
+			
+		}
 	private static void invokeAdapterMethods() {
 		in.setupConfig(conf);
 		in.connectToQueueManager(queue);
 		out.setupConfig(conf);
 	}
+public class dokumentacjaMain{
+		
 
+		/** 
+		 *@autor Kamil Klarecki 
+		 *  
+		 *  */
+			
+		}
 	public static void main(String[] args) {
 		new AppCore(configPath);
 		setUp();

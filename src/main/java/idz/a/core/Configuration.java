@@ -10,7 +10,15 @@ import java.util.Properties;
  * @author Bartosz Domin
  * 
  */
+public class dokumentacjaConfiguration{
+	
 
+	/** 
+	 *@autor Kamil Klarecki 
+	 *  
+	 *  */
+		
+	}
 public class Configuration {
 
 	private static String inputAdapter, outputAdapter, inputFilePath,
