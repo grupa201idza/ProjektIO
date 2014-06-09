@@ -10,7 +10,6 @@ import java.util.List;
 
 import idz.a.core.Configuration;
 import idz.a.core.Event;
-import idz.a.core.ForeseenException;
 
 //TODO test JSON File Output especially "storeEvents"
 /*
@@ -24,22 +23,22 @@ public class FileOutputAdapter implements OutputAdapter {
 	private String outputFilePath;
 
 	FileOutputAdapter(Configuration config){
-		setupConfig(config);
+		//setupConfig(config);
 	}
 	
 	/*
 	 * Applies valid configuration
 	 */
 	@Override
-	public void setupConfig(Configuration config) {
+	public void setupConfig(idz.a.core.Configuration config) {
 		try {
-			if (config != null & config.getOutputFilePath() != null)
-				this.outputFilePath = config.getOutputFilePath();
-			else if (config.getOutputFilePath() == null)
-				throw new ForeseenException(
+			if (config != null & Configuration.getOutputFilePath() != null)
+				this.outputFilePath = Configuration.getOutputFilePath();
+			else if (Configuration.getOutputFilePath() == null)
+				throw new Exception(
 						"Denied: Tried to apply UnindentifiedFilePath");
 
-		} catch (ForeseenException fore) {
+		} catch (Exception fore) {
 			System.out.println("ForeseenException catched");
 		}
 	}
@@ -76,10 +75,10 @@ public class FileOutputAdapter implements OutputAdapter {
 			for (Iterator<Event> batchScope = batch.iterator(); batchScope
 					.hasNext();) {
 				temporary = batchScope.next();
-				entryEvent = new String("{ \"time\" : "
-						+ temporary.getTimestamp() + " \"detail\" : "
-						+ temporary.getDetails() + " \"logLevel\" : "
-						+ temporary.getLoglevel() + " \" }");
+				entryEvent = new String("{ \"time\":\""
+						+ temporary.getTimestamp() + "\",\"detail\":\""
+						+ temporary.getDetails() + "\",\"logLevel\":\""
+						+ temporary.getLoglevel() + "\"}");
 				/*
 				 * attempts to write line to file under given filepath
 				 */

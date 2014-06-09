@@ -6,6 +6,7 @@ import idz.a.core.QueueManager;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -13,15 +14,34 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * SocketInputAdapter class.
+ *
+ * @author Lukasz Kot
+ */
 public class SocketInputAdapter implements InputAdapter {
-		Configuration config;
-		QueueManager queue;
-		Socket socket;
-		public SocketInputAdapter(Socket socket, QueueManager queue) {
-		this.socket = socket;
-		this.queue = queue;
-	}
-	private void parseEvent(final String log) {
+		private Configuration config;
+		private QueueManager queue;
+		private Socket socket = null;
+		private int port;
+		private ServerSocket serverSocket = null;
+		
+		/**
+		 * Initializes new SocketInputAdapter object.
+		 */
+		public SocketInputAdapter() {
+			super();
+			port = Configuration.getInputSocket();
+		}
+		/**
+		 * Method parses line's content and adds event to queue.
+		 * 
+		 * @param log - read line from socket.
+		 * @return true if added to queue or
+		 * 			false if not added to queue.
+		 */
+	private boolean parseEvent(final String log) {
+		boolean readEvent = false;
 		String tDate;
 		String tTime;
 		String tLevel;
@@ -43,7 +63,7 @@ SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 				Date parsedDate = formatter.parse(tDate);
 				timestamp = new Timestamp(parsedDate.getTime());
 			} catch (ParseException e) {
-				return;
+				return false;
 			}
 			final int tLevelSubsFir = 27;
 			final int tLevelSubsSec = 28;
@@ -75,40 +95,95 @@ SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 			}
 			tDetails = log.substring(positionDetails);
 			event = new Event(timestamp, tDetails, logLevel);
-			if (queue.acceptEvent(event)) { System.out.println("Added to queue."); } else { System.out.println("Not added to queue."); }
+			if (queue.acceptEvent(event)) { readEvent = true; } else { readEvent = false; }
 		}
+		return readEvent;
 	}
-	final void start() {
+	
+	/**
+	 * Method awaits for the connection and
+	 * creates socket if connection is made.
+	 * 
+	 * @return true if connected to source
+	 * 			or false if not connected to source.
+	 */
+	public final boolean connectToSource() {
+		try {
+			serverSocket = new ServerSocket(port);
+			socket = serverSocket.accept();
+		} catch (IOException e) {
+			return false;
+		}
+		if (socket != null)
+			return true;
+		else
+			return false;
+	}
+	
+	/**
+	 * Method reads line from socket and invokes method parseEvent.
+	 * 
+	 * @return true if method parseEvent returns true;
+	 * 			in any other case returns false.
+	 */
+	public final boolean readLog() {
+		boolean readEvent = false;
 		BufferedReader brinp = null;
 		try {
 			brinp = new BufferedReader(
 new InputStreamReader(socket.getInputStream()));
 		} catch (IOException e) {
-			System.out.println(
-"Blad przy tworzeniu strumienia " + e);
+			readEvent = false;
 		}
+		final int sleepTime = 200;
 		String line = null;
-		while (true) {
 		try {
+			try {
+				Thread.sleep(sleepTime);
+			} catch (InterruptedException e) {
+				readEvent = false;
+			}
 			line = brinp.readLine();
 			if (line != null) {
-				parseEvent(line);
+				if (parseEvent(line))
+					readEvent = true;
+				else
+					readEvent = false;
 			}
 }
 		catch (IOException e) {
-			System.out.println("Blad wejscia-wyjscia");
-			return;
+			readEvent = false;
 		}
-		}
+		return readEvent;
 	}
 
-	public void setupConfig(Configuration config) {
-		// TODO Auto-generated method stub
+	/**
+	 * Method closes Socket and ServerSocket objects.
+	 */
+	public final void closeSocket() {
+		try {
+			socket.close();
+			serverSocket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Method setups Configuration object.
+	 * 
+	 * @param config - Configuration object.
+	 */
+	public final void setupConfig(final Configuration config) {
 		this.config = config;
 	}
 
-	public void connectToQueueManager(QueueManager queue) {
-		// TODO Auto-generated method stub
+	/**
+	 * Method setups QueueManager object.
+	 * 
+	 * @param queue - QueueManager object
+	 */
+	public final void connectToQueueManager(final QueueManager queue) {
 		this.queue = queue;
 	}
 }
