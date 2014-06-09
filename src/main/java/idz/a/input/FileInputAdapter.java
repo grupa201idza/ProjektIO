@@ -17,15 +17,6 @@ import java.util.Scanner;
  *
  * @author Przemyslaw Springer
  */
-
-public class dokumentacjaFileInputAdapter{
-
-	/** 
-	 *@autor Kamil Klarecki 
-	 *  Przechowuje informacje o czasie, szczegó³ach
-	 * 
-	 *  */
-	}
 public class FileInputAdapter implements InputAdapter {
 
 	private Configuration config;
@@ -40,14 +31,6 @@ public class FileInputAdapter implements InputAdapter {
 	/**
 	 * Initializes new FileInputAdapter object.
 	 */
-	public class dokumentacjaFileInputAdapter{
-
-		/** 
-		 *@autor Kamil Klarecki 
-		 *  Przechowuje informacje o czasie, szczegó³ach
-		 * 
-		 *  */
-		}
 	public FileInputAdapter() {
 		logPath = Configuration.getInputFilePath();
 		isConnected = connectToSource();
@@ -57,14 +40,6 @@ public class FileInputAdapter implements InputAdapter {
 	 * 		purposes.
 	 * @param test garbage parameter
 	 */
-	public class dokumentacjaFileInputAdapter{
-
-		/** 
-		 *@autor Kamil Klarecki 
-		 *  Przechowuje informacje o czasie, szczegó³ach
-		 * 
-		 *  */
-		}
 	public FileInputAdapter(final int test) {
 		super();
 	}
@@ -85,14 +60,6 @@ public class FileInputAdapter implements InputAdapter {
 	 *
 	 * @return true if connected to source; false if not connected to source
 	 */
-	public class dokumentacjaconnectToSource{
-
-		/** 
-		 *@autor Kamil Klarecki 
-		 *  Przechowuje informacje o czasie, szczegó³ach
-		 * 
-		 *  */
-		}
 	private boolean connectToSource() {
 		int connAttempts = 0;
 		while (connAttempts < connectionAmount) {
@@ -113,15 +80,6 @@ public class FileInputAdapter implements InputAdapter {
 	/**
 	 * Reads log file line by line.
 	 */
-	
-	public class dokumentacjaconnectToSource{
-
-		/** 
-		 *@autor Kamil Klarecki 
-		 *  Przechowuje informacje o czasie, szczegó³ach
-		 * 
-		 *  */
-		}
 	public final void readLog() {
 		if (isConnected) {
 			if (scanner.hasNextLine()
