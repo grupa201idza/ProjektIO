@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class FileInputAdapterTest {
 
-	private FileInputAdapter fia = new FileInputAdapter();
+	private FileInputAdapter fia = new FileInputAdapter(44);
 	private final Event event1 = fia.parseEvent(getLog1());
 	private final Event event2 = fia.parseEvent(getLog2());
 
