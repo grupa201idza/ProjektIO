@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 import java.util.Scanner;
 
 /**
- * FileInputAdapter class.
+ *Klasa zawierajaca wejscie z pliku
  *
  * @author Przemyslaw Springer
  */
@@ -28,16 +28,16 @@ public class FileInputAdapter implements InputAdapter {
 	private Scanner scanner;
 	private boolean isConnected;
 
-	/**
-	 * Initializes new FileInputAdapter object.
-	 */
+/**
+ * Konstruktor ktory przyjmuje sciezke pliku i sprawdza czy jest polaczenie
+ */
 	public FileInputAdapter() {
 		super();
 	}
 
-	/** FileInputAdapter constructor for testing
-	 * 		purposes.
+	/**Konstruktor FileInputAdapter dla testowania wyników
 	 * @param test garbage parameter
+	 
 	 */
 	public FileInputAdapter(final int test) {
 		super();
