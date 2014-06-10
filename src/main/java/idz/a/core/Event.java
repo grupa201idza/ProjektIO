@@ -10,8 +10,7 @@ import java.sql.Timestamp;
 /**
  * @author Bartosz Domin 
  *  Przechowuje informacje o czasie, szczegolach, 
- *  rodzaju loga.
- * 
+ *  rodzaju loga. 
  */
 public class Event {
 
@@ -49,25 +48,29 @@ public class Event {
 		this.timestamp = timestamp;
 	}
 /**
- * @return
+ * Zwraca lancuch zawierajacy szczegoly
+ * @return szczegoly
  */
 	public String getDetails() {
 		return details;
 	}
 /**
- * 
+ * GEneracja szczegolow
+ * @param details szczegoly
  */
 	public void setDetails(String details) {
 		this.details = details;
 	}
 /**
- * @return
+ * Parametr zwracajacy poziom loga
+ * @return poziom loga
  */
 	public Enum.LogLevel getLoglevel() {
 		return loglevel;
 	}
 /**
- * @return
+ * Generuje poziom loga
+ * @param loglevel poziom loga
  */
 	public void setLoglevel(Enum.LogLevel loglevel) {
 		this.loglevel = loglevel;
