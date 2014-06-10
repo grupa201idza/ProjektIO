@@ -17,14 +17,13 @@ public class AppCore {
 	static QueueManager queue;
 	int batchSize = 0;
 	static String inputName, outputName;
-	/** 
-	 
-	 * Konstruktor przyjmuj¹cy za parametr œcie¿kê pliku inicjalizuj¹cego konfiguracji.
-	 * Tworzy now¹ konfiguracje w oparciu o podan¹ œcie¿kê.
-	 * Na podstawie konfiguracji ustala rozmiar kolejki logów oraz wejœciowy i wyjœciowy 
-	 * adapter wed³ug nazwy.
-	 *  */
-		
+	/**
+		 * Konstruktor przyjmuj¹cy za parametr œcie¿kê pliku inicjalizuj¹cego konfiguracji.
+		 * Tworzy now¹ konfiguracje w oparciu o podan¹ œciezke.
+		 * Na podstawie konfiguracji ustala rozmiar kolejki logów oraz wejœciowy i wyjœciowy 
+		 * adapter wed³ug nazwy.
+	 * @param path
+	 */
 	public AppCore(String path) {
 		conf = new Configuration(path);
 		batchSize = conf.getBatchSize();
@@ -32,10 +31,11 @@ public class AppCore {
 		outputName = conf.getOutputAdapter();
 	}
 	
-	/** 
-	 *  *  Tworzy obiekt adaptera implementuj¹cego interface 
+	/**
+	 * Tworzy obiekt adaptera implementuj¹cego interface 
 	 *  InputAdapter o zadanej nazwie.
-	 *  */
+	 * @param name nazwa interfejsu
+	 */
 	private static void loadInputAdapter(String name) {
 
 		try {
@@ -48,11 +48,11 @@ public class AppCore {
 		}
 	}
 	
-	/** 
-	 *  *  Tworzy obiekt adaptera implementuj¹cego interface 
+	/**
+	 *    Tworzy obiekt adaptera implementuj¹cego interfejs
 	 * Output InputAdapter o zadanej nazwie
-	 *  */
-		
+	 * @param name nazwa parametru
+	 */
 	private static void loadOutputAdapter(String name) {
 
 		try {
@@ -66,22 +66,19 @@ public class AppCore {
 
 	}
 	/** 
-	
 	 * Wykorzystuje metody ³aduj¹ce adapter wejœciowy i wyjœciowy 
 	 *  ze œcie¿ki o zadanej nazwie i powoduje now¹ instancjê menad¿era kolejki
 	 *  */
-		
 	private static void setUp() {
 		loadInputAdapter("idz.a.input." + inputName);
 		loadOutputAdapter("idz.a.output." + outputName);
 		queue = new QueueManager();
 	}
 	
-	/** 
-	 * *  Inicjalizuje pola adapter wykorzystuj¹c istniej¹c¹ konfiguracjê
-	 *  Do³¹cza obiekt menad¿era kolejki inicjalizuje pola adaptera wyjœciowego
-	 *  */
-		
+	/**
+	 * Inicjalizuje pola adapter wykorzystuj¹c istniejac¹ konfiguracje
+	 *  Dolacza obiekt menadzera kolejki inicjalizuje pola adaptera wyjsciowego
+	 */
 	private static void invokeAdapterMethods() {
 		in.setupConfig(conf);
 		in.connectToQueueManager(queue);
@@ -89,10 +86,11 @@ public class AppCore {
 	}
 	
 	/**
-	 *  Tworzy obiekt ApCore
-	 *  Wywo³uje  setUp i invokeAdapterMethod
-	 *  oraz wczytuje logi w nieskoñczonej pêtli
-	 *  */
+	 * Tworzy obiekt ApCore
+	 *  Wywoluje  setUp i invokeAdapterMethod
+	 *  oraz wczytuje logi w nieskonczonej petl
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		new AppCore(configPath);
 		setUp();
