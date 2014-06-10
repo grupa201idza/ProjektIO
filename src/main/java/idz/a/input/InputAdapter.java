@@ -8,5 +8,5 @@ public interface InputAdapter {
 
 	public abstract void setupConfig(Configuration config);
 	public abstract void connectToQueueManager(QueueManager queue);
-	public abstract void readLog();
+	public abstract boolean readLog();
 }

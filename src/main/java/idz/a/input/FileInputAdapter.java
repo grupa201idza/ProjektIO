@@ -80,7 +80,7 @@ public class FileInputAdapter implements InputAdapter {
 	/**
 	 * Reads log file line by line.
 	 */
-	public final void readLog() {
+	public boolean readLog() {
 		if (isConnected) {
 			if (scanner.hasNextLine()
 					&& queue.currentSize()
@@ -94,6 +94,7 @@ public class FileInputAdapter implements InputAdapter {
 						&& !event.getLoglevel().equals(
 								null)) {
 					queue.acceptEvent(event);
+					return true;
 				} else {
 					System.out.println(
 							"Unprocessable line");
@@ -102,6 +103,7 @@ public class FileInputAdapter implements InputAdapter {
 		} else {
 			System.err.println("Log source not found!");
 		}
+		return false;
 	}
 
 	/**
