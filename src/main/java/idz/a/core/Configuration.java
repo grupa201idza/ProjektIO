@@ -13,8 +13,8 @@ import java.util.Properties;
 
 
 /** 
- *  Klasa przechowuj¹ca dane konfiguracyjne dla
- *   adapterów wejœciowych i wyjœciowych oraz funkcjonowania programu
+ *  Klasa przechowujï½¹ca dane konfiguracyjne dla
+ *   adapterî‰« wejå½¡iowych i wyjå½¡iowych oraz funkcjonowania programu
  *  */	
 public class Configuration {
 
@@ -26,10 +26,10 @@ public class Configuration {
 	
 	/** 
 	 * Inicjalizacja instancji konfiguracji poprzez odwolanie 
-	 *  siê do pliku znajduj¹cego sie na sciezce przekazanej w 
-	 *  ³añcuchu jako parametr konstruktora
-	 *  Wykorzystanie klasê property do zebrania danych z pliku tekstowego
-	 *   przechowuj¹cego dane konfiguracyjne.
+	 *  siï¿½ do pliku znajdujï½¹cego sie na sciezce przekazanej w 
+	 *  ï½³aîƒŸuchu jako parametr konstruktora
+	 *  Wykorzystanie klasï¿½ property do zebrania danych z pliku tekstowego
+	 *   przechowujï½¹cego dane konfiguracyjne.
 	 *   W razie bledu zamyka kanal wejsciowy pliku
 	  *  */
 		
@@ -69,94 +69,94 @@ public class Configuration {
 	
 	/**
 	 * /** 
-	 *  Zwraca lancuch z nazw¹ wybranego adaptera wejsciowego
-	 *  
+	 * Zwraca lancuch z nazwï½¹ wybranego adaptera wejsciowego
+	 * 
 	 * @return nazwa adaptera
 	 */
-	public static String getInputAdapter() {
+	public String getInputAdapter() {
 		return inputAdapter;
 	}
 	
 /**
  * 	/** 
-	 *  Zwraca lancuch z nazw¹ wybranego adaptera wyjsciowego
+	 * Zwraca lancuch z nazwï½¹ wybranego adaptera wyjsciowego
 	 *
  * @return nazwa adatera
  */
-	public static String getOutputAdapter() {
+	public String getOutputAdapter() {
 		return outputAdapter;
 	}
 	/**
 	 * ** 
-	 *  Zwraca lancuch z œcie¿k¹ pliku dla adaptera wejsciowego
+	 * Zwraca lancuch z å½¡ieï½¿kï½¹ pliku dla adaptera wejsciowego
 	 * @return sciezka pliku
 	 */
-	public static String getInputFilePath() {
+	public String getInputFilePath() {
 		return inputFilePath;
 	}
 	/**
 	 * /** 
-	 *  Zwraca lancuch z sciezk¹ pliku dla adaptera wyjsciowego
+	 * Zwraca lancuch z sciezkï½¹ pliku dla adaptera wyjsciowego
 	 * 
 	 * @return sciezka pliku
 	 */
-	public static String getOutputFilePath() {
+	public String getOutputFilePath() {
 		return outputFilePath;
 	}
 /**
  * 
  * @return
  */
-	public static int getInputSocket() {
+	public int getInputSocket() {
 		return inputSocket;
 	}
 /**
  * 
  * @return
  */
-	public static String getInputURL() {
+	public String getInputURL() {
 		return inputURL;
 	}
 /**
  * 
  * @return
  */
-	public static int getBatchSize() {
+	public int getBatchSize() {
 		return batchSize;
 	}
 /**
  * 
  * @return
  */
-	public static String getDBLogin() {
+	public String getDBLogin() {
 		return DBLogin;
 	}
 /**
  * 
  * @return
  */
-	public static String getDBPassword() {
+	public String getDBPassword() {
 		return DBPassword;
 	}
 /**
  * 
  * @return
  */
-	public static String getDBName() {
+	public String getDBName() {
 		return DBName;
 	}
 /**
  * 
  * @return
  */
-	public static String getDBTable() {
+	public String getDBTable() {
 		return DBTable;
 	}
 /**
  * 
  * @return
- */
-	public static int getDBPort() {
+ */ 
+	public int getDBPort() {
 		return DBPort;
 	}
 
