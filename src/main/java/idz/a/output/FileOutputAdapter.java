@@ -58,6 +58,7 @@ public class FileOutputAdapter implements OutputAdapter {
 	@Override
 	/**
 	Sprawdza czy pliki istnieje, je¿eli nie tworzy go. Pozniej dopisuje logi do pliku
+	@return 
 	*/
 	public boolean storeEvents(List<Event> batch) {
 		File storageFile = new File(outputFilePath);
