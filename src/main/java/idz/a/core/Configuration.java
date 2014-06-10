@@ -12,10 +12,10 @@ import java.util.Properties;
  */
 
 
-/**
+/** 
  *  Klasa przechowuj¹ca dane konfiguracyjne dla
- *  adapterow wejœciowych i wyjsciowych oraz funkcjonowania programu
- */
+ *   adapterów wejœciowych i wyjœciowych oraz funkcjonowania programu
+ *  */	
 public class Configuration {
 
 	private static String inputAdapter, outputAdapter, inputFilePath,
@@ -24,14 +24,15 @@ public class Configuration {
 	Properties prop = new Properties();
 	InputStream input = null;
 	
-	/**
+	/** 
 	 * Inicjalizacja instancji konfiguracji poprzez odwolanie 
 	 *  siê do pliku znajduj¹cego sie na sciezce przekazanej w 
-	 *  lancuchu jako parametr konstruktora
-	 *  Wykorzystanie klase property do zebrania danych z pliku tekstowego
+	 *  ³añcuchu jako parametr konstruktora
+	 *  Wykorzystanie klasê property do zebrania danych z pliku tekstowego
 	 *   przechowuj¹cego dane konfiguracyjne.
-	 *   W razie b³êdu zamyka kana³ wejœciowy plik
-	 */
+	 *   W razie bledu zamyka kanal wejsciowy pliku
+	  *  */
+		
 	public Configuration(String path) {
 
 		try {
@@ -66,60 +67,95 @@ public class Configuration {
 		}
 	}
 	
-	/** 
-	 *  Zwraca ³añcuch z nazw¹ wybranego adaptera wejœciowego
-	 *  */
+	/**
+	 * /** 
+	 *  Zwraca lancuch z nazw¹ wybranego adaptera wejsciowego
+	 *  
+	 * @return nazwa adaptera
+	 */
 	public static String getInputAdapter() {
 		return inputAdapter;
 	}
 	
-	/** 
-	 *  Zwraca ³añcuch z nazw¹ wybranego adaptera wyjœciowego
-	 *  */
+/**
+ * 	/** 
+	 *  Zwraca lancuch z nazw¹ wybranego adaptera wyjsciowego
+	 *
+ * @return nazwa adatera
+ */
 	public static String getOutputAdapter() {
 		return outputAdapter;
 	}
-	/** 
-	 *  Zwraca ³añcuch z œcie¿k¹ pliku dla adaptera wejœciowego
-	 *  */
+	/**
+	 * ** 
+	 *  Zwraca lancuch z œcie¿k¹ pliku dla adaptera wejsciowego
+	 * @return sciezka pliku
+	 */
 	public static String getInputFilePath() {
 		return inputFilePath;
 	}
-	/** 
-	 *  Zwraca ³añcuch z œcie¿k¹ pliku dla adaptera wyjœciowego
-	 *  */
+	/**
+	 * /** 
+	 *  Zwraca lancuch z sciezk¹ pliku dla adaptera wyjsciowego
+	 * 
+	 * @return sciezka pliku
+	 */
 	public static String getOutputFilePath() {
 		return outputFilePath;
 	}
-
+/**
+ * 
+ * @return
+ */
 	public static int getInputSocket() {
 		return inputSocket;
 	}
-
+/**
+ * 
+ * @return
+ */
 	public static String getInputURL() {
 		return inputURL;
 	}
-
+/**
+ * 
+ * @return
+ */
 	public static int getBatchSize() {
 		return batchSize;
 	}
-
+/**
+ * 
+ * @return
+ */
 	public static String getDBLogin() {
 		return DBLogin;
 	}
-
+/**
+ * 
+ * @return
+ */
 	public static String getDBPassword() {
 		return DBPassword;
 	}
-
+/**
+ * 
+ * @return
+ */
 	public static String getDBName() {
 		return DBName;
 	}
-
+/**
+ * 
+ * @return
+ */
 	public static String getDBTable() {
 		return DBTable;
 	}
-
+/**
+ * 
+ * @return
+ */
 	public static int getDBPort() {
 		return DBPort;
 	}
