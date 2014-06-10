@@ -13,8 +13,8 @@ import java.util.Properties;
 
 
 /** 
- *  Klasa przechowujｹca dane konfiguracyjne dla
- *   adapter wej彡iowych i wyj彡iowych oraz funkcjonowania programu
+ *  Klasa przechowujaca dane konfiguracyjne dla
+ *   adapterow wejsciowych i wyjsciowych oraz funkcjonowania programu
  *  */	
 public class Configuration {
 
@@ -26,10 +26,10 @@ public class Configuration {
 	
 	/** 
 	 * Inicjalizacja instancji konfiguracji poprzez odwolanie 
-	 *  si� do pliku znajdujｹcego sie na sciezce przekazanej w 
-	 *  ｳauchu jako parametr konstruktora
-	 *  Wykorzystanie klas� property do zebrania danych z pliku tekstowego
-	 *   przechowujｹcego dane konfiguracyjne.
+	 *   sie do pliku znajduj�cego sie na sciezce przekazanej w  
+	 *  lancuchu jako parametr konstruktora
+	 *  Wykorzystanie klasy property do zebrania danych z pliku tekstowego
+	 *   przechowujacego dane konfiguracyjne.
 	 *   W razie bledu zamyka kanal wejsciowy pliku
 	  *  */
 		
