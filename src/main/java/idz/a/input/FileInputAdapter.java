@@ -32,8 +32,7 @@ public class FileInputAdapter implements InputAdapter {
 	 * Initializes new FileInputAdapter object.
 	 */
 	public FileInputAdapter() {
-		logPath = Configuration.getInputFilePath();
-		isConnected = connectToSource();
+		super();
 	}
 
 	/** FileInputAdapter constructor for testing
@@ -84,7 +83,7 @@ public class FileInputAdapter implements InputAdapter {
 		if (isConnected) {
 			if (scanner.hasNextLine()
 					&& queue.currentSize()
-					< Configuration.getBatchSize()) {
+					< config.getBatchSize()) {
 				event = parseEvent(scanner.nextLine());
 				if (!(event==null)
 						&& !event.getTimestamp().equals(
@@ -98,6 +97,7 @@ public class FileInputAdapter implements InputAdapter {
 				} else {
 					System.out.println(
 							"Unprocessable line");
+					return true;
 				}
 			}
 		} else {
@@ -200,7 +200,9 @@ public class FileInputAdapter implements InputAdapter {
 	 *            Configuration object
 	 */
 	public final void setupConfig(final Configuration configCon) {
-		this.config = configCon;
+		config = configCon;
+		logPath = config.getInputFilePath();
+		isConnected = connectToSource();
 	}
 
 	/**
