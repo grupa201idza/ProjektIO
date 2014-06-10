@@ -16,11 +16,12 @@ public class AppCore {
 	static Configuration conf;
 	static QueueManager queue;
 	int batchSize = 0;
+	static int countIn = 0, countOut = 0;
 	static String inputName, outputName;
 
 	/**
 	 * Konstruktor przyjmujacy za parametr sciezke pliku inicjalizujacego
-	 * konfiguracji. Tworzy now¹ konfiguracje w oparciu o podana sciezke. Na
+	 * konfiguracji. Tworzy nowa konfiguracje w oparciu o podana sciezke. Na
 	 * podstawie konfiguracji ustala rozmiar kolejki logow oraz wejsciowy i
 	 * wyjsciowy adapter wedlug nazwy.
 	 * 
@@ -98,13 +99,34 @@ public class AppCore {
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
+public static void main(String[] args) {
 		new AppCore(configPath);
 		setUp();
 		invokeAdapterMethods();
 		while (true) {
-			in.readLog();
-			queue.sendEvents();
+			if(countIn>9 || countOut>9)
+				break;
+			if (!in.readLog()) {
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				countIn++;
+			} else
+				countIn=0;
+			if (queue.currentSize()>0){
+			if (!queue.sendEvents()) {
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				countOut++;
+			} else
+				countOut=0;
+		}
 		}
 	}
 }
+
