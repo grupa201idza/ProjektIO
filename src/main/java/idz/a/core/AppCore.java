@@ -10,7 +10,7 @@ import idz.a.output.OutputAdapter;
 
 public class AppCore {
 
-	static String configPath = "project/idz/a/core/Config.txt";
+	static String configPath = "src/main/java/idz/a/core/Config.txt";
 	static InputAdapter in;
 	static OutputAdapter out;
 	static Configuration conf;
@@ -18,10 +18,10 @@ public class AppCore {
 	int batchSize = 0;
 	static String inputName, outputName;
 	/**
-		 * Konstruktor przyjmuj¹cy za parametr œcie¿kê pliku inicjalizuj¹cego konfiguracji.
-		 * Tworzy now¹ konfiguracje w oparciu o podan¹ œciezke.
-		 * Na podstawie konfiguracji ustala rozmiar kolejki logów oraz wejœciowy i wyjœciowy 
-		 * adapter wed³ug nazwy.
+		 * Konstruktor przyjmujï½¹cy za parametr å½¡ieï½¿kï¿½ pliku inicjalizujï½¹cego konfiguracji.
+		 * Tworzy nowï½¹ konfiguracje w oparciu o podanï½¹ å½¡iezke.
+		 * Na podstawie konfiguracji ustala rozmiar kolejki logî‰« oraz wejå½¡iowy i wyjå½¡iowy 
+		 * adapter wedï½³ug nazwy.
 	 * @param path
 	 */
 	public AppCore(String path) {
@@ -32,7 +32,7 @@ public class AppCore {
 	}
 	
 	/**
-	 * Tworzy obiekt adaptera implementuj¹cego interface 
+	 * Tworzy obiekt adaptera implementujï½¹cego interface 
 	 *  InputAdapter o zadanej nazwie.
 	 * @param name nazwa interfejsu
 	 */
@@ -49,7 +49,7 @@ public class AppCore {
 	}
 	
 	/**
-	 *    Tworzy obiekt adaptera implementuj¹cego interfejs
+	 *    Tworzy obiekt adaptera implementujï½¹cego interfejs
 	 * Output InputAdapter o zadanej nazwie
 	 * @param name nazwa parametru
 	 */
@@ -66,17 +66,18 @@ public class AppCore {
 
 	}
 	/** 
-	 * Wykorzystuje metody ³aduj¹ce adapter wejœciowy i wyjœciowy 
-	 *  ze œcie¿ki o zadanej nazwie i powoduje now¹ instancjê menad¿era kolejki
+	 * Wykorzystuje metody ï½³adujï½¹ce adapter wejå½¡iowy i wyjå½¡iowy 
+	 *  ze å½¡ieï½¿ki o zadanej nazwie i powoduje nowï½¹ instancjï¿½ menadï½¿era kolejki
 	 *  */
 	private static void setUp() {
 		loadInputAdapter("idz.a.input." + inputName);
 		loadOutputAdapter("idz.a.output." + outputName);
 		queue = new QueueManager();
+		queue.setBatchSize(conf.getBatchSize());
 	}
 	
 	/**
-	 * Inicjalizuje pola adapter wykorzystuj¹c istniejac¹ konfiguracje
+	 * Inicjalizuje pola adapter wykorzystujï½¹c istniejacï½¹ konfiguracje
 	 *  Dolacza obiekt menadzera kolejki inicjalizuje pola adaptera wyjsciowego
 	 */
 	private static void invokeAdapterMethods() {

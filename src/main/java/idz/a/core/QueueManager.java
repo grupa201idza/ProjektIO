@@ -29,6 +29,10 @@ public class QueueManager {
 		connectOutputAdapter();
 	}
 	
+		public void setBatchSize(int size){
+		batchSize=size;
+	}
+	
 	/** 
 	 * Pod³¹cza do wyjœcia AppCore
 	 *  */
