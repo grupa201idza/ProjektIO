@@ -78,7 +78,8 @@ public class DBOutputAdapter implements OutputAdapter {
 		return false;
 	}
 /**
- * Laczy ze zrod³em. Wyswietla informacje o sukcesie lub porazce polaczenia.
+ * Laczy ze zrodlem. Wyswietla informacje o sukcesie lub porazce polaczenia.
+ * @return inormacja o sukcesie lub porazce
  */
 	public boolean connectToSource() {
 		System.out.println("Connecting to database...");
