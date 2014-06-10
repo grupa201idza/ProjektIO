@@ -77,7 +77,9 @@ public class DBOutputAdapter implements OutputAdapter {
 		}
 		return false;
 	}
-
+/**
+ * Laczy ze zrod³em. Wyswietla informacje o sukcesie lub porazce polaczenia.
+ */
 	public boolean connectToSource() {
 		System.out.println("Connecting to database...");
 		connection = getConnection();
@@ -91,7 +93,9 @@ public class DBOutputAdapter implements OutputAdapter {
 		}
 		return false;
 	}
-
+/**
+ * * Metoda zwracajaca polaczenie z baza danych.
+ */
 	public Connection getConnection() {
 		Connection connection = null;
 		String jdbcClassName = "com.ibm.db2.jcc.DB2Driver";
