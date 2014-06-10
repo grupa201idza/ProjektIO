@@ -68,8 +68,8 @@ public class Configuration {
 	}
 	
 	/**
-	 * /** 
-	 * Zwraca lancuch z nazwｹ wybranego adaptera wejsciowego
+	
+	 * Zwraca lancuch z nazwa wybranego adaptera wejsciowego
 	 * 
 	 * @return nazwa adaptera
 	 */
@@ -79,7 +79,7 @@ public class Configuration {
 	
 /**
  * 	/** 
-	 * Zwraca lancuch z nazwｹ wybranego adaptera wyjsciowego
+	 * Zwraca lancuch z nazwa wybranego adaptera wyjsciowego
 	 *
  * @return nazwa adatera
  */
@@ -88,7 +88,7 @@ public class Configuration {
 	}
 	/**
 	 * ** 
-	 * Zwraca lancuch z 彡ieｿkｹ pliku dla adaptera wejsciowego
+	 * Zwraca lancuch z sciezk� pliku dla adaptera wejsciowego
 	 * @return sciezka pliku
 	 */
 	public String getInputFilePath() {
@@ -96,7 +96,7 @@ public class Configuration {
 	}
 	/**
 	 * /** 
-	 * Zwraca lancuch z sciezkｹ pliku dla adaptera wyjsciowego
+	 * Zwraca lancuch z sciezk� pliku dla adaptera wyjsciowego
 	 * 
 	 * @return sciezka pliku
 	 */
