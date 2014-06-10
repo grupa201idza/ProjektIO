@@ -24,7 +24,7 @@ import idz.a.core.Event;
 public class FileOutputAdapter implements OutputAdapter {
 
 	private String outputFilePath;
-/**
+     /**
 	 * konstruktor adaptera
 	 */
 

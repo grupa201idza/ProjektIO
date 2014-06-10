@@ -45,6 +45,7 @@ public class DBOutputAdapter implements OutputAdapter {
 	@Override
 	/**
 	 * Wstawia w tabelê logow nowy wiersz zawierajacy dane loga
+	 *  @return wynik
 	 */
 	public boolean storeEvents(List<Event> batch) {
 		PreparedStatement stmt = null;
@@ -79,7 +80,7 @@ public class DBOutputAdapter implements OutputAdapter {
 	}
 /**
  * Laczy ze zrodlem. Wyswietla informacje o sukcesie lub porazce polaczenia.
- * @return inormacja o sukcesie lub porazce
+ * @return inormacja o sukcesie lub porazce.
  */
 	public boolean connectToSource() {
 		System.out.println("Connecting to database...");
@@ -96,6 +97,7 @@ public class DBOutputAdapter implements OutputAdapter {
 	}
 /**
  * * Metoda zwracajaca polaczenie z baza danych.
+ * @return polaczenie z baza.
  */
 	public Connection getConnection() {
 		Connection connection = null;
