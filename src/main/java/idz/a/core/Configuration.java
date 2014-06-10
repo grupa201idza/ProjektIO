@@ -1,4 +1,4 @@
-package idz.a.core;
+package main.java.idz.a.core;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,8 +13,8 @@ import java.util.Properties;
 
 
 /** 
- *  Klasa przechowuj¹ca dane konfiguracyjne dla
- *   adapterów wejœciowych i wyjœciowych oraz funkcjonowania programu
+ *  Klasa przechowujï½¹ca dane konfiguracyjne dla
+ *   adapterî‰« wejå½¡iowych i wyjå½¡iowych oraz funkcjonowania programu
  *  */	
 public class Configuration {
 
@@ -25,12 +25,12 @@ public class Configuration {
 	InputStream input = null;
 	
 	/** 
-	 * Inicjalizacja instancji konfiguracji poprzez odwo³anie 
-	 *  siê do pliku znajduj¹cego siê na œcie¿ce przekazanej w 
-	 *  ³añcuchu jako parametr konstruktora
-	 *  Wykorzystanie klasê property do zebrania danych z pliku tekstowego
-	 *   przechowuj¹cego dane konfiguracyjne.
-	 *   W razie b³êdu zamyka kana³ wejœciowy pliku
+	 * Inicjalizacja instancji konfiguracji poprzez odwoï½³anie 
+	 *  siï¿½ do pliku znajdujï½¹cego siï¿½ na å½¡ieï½¿ce przekazanej w 
+	 *  ï½³aîƒŸuchu jako parametr konstruktora
+	 *  Wykorzystanie klasï¿½ property do zebrania danych z pliku tekstowego
+	 *   przechowujï½¹cego dane konfiguracyjne.
+	 *   W razie bï½³é¹½u zamyka kanaï½³ wejå½¡iowy pliku
 	  *  */
 		
 	public Configuration(String path) {
@@ -68,26 +68,26 @@ public class Configuration {
 	}
 	
 	/** 
-	 *  Zwraca ³añcuch z nazw¹ wybranego adaptera wejœciowego
+	 *  Zwraca ï½³aîƒŸuch z nazwï½¹ wybranego adaptera wejå½¡iowego
 	 *  */
 	public static String getInputAdapter() {
 		return inputAdapter;
 	}
 	
 	/** 
-	 *  Zwraca ³añcuch z nazw¹ wybranego adaptera wyjœciowego
+	 *  Zwraca ï½³aîƒŸuch z nazwï½¹ wybranego adaptera wyjå½¡iowego
 	 *  */
 	public static String getOutputAdapter() {
 		return outputAdapter;
 	}
 	/** 
-	 *  Zwraca ³añcuch z œcie¿k¹ pliku dla adaptera wejœciowego
+	 *  Zwraca ï½³aîƒŸuch z å½¡ieï½¿kï½¹ pliku dla adaptera wejå½¡iowego
 	 *  */
 	public static String getInputFilePath() {
 		return inputFilePath;
 	}
 	/** 
-	 *  Zwraca ³añcuch z œcie¿k¹ pliku dla adaptera wyjœciowego
+	 *  Zwraca ï½³aîƒŸuch z å½¡ieï½¿kï½¹ pliku dla adaptera wyjå½¡iowego
 	 *  */
 	public static String getOutputFilePath() {
 		return outputFilePath;
