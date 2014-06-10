@@ -1,7 +1,7 @@
-package main.java.idz.a.core;
+package idz.a.core;
 
-import main.java.idz.a.input.InputAdapter;
-import main.java.idz.a.output.OutputAdapter;
+import idz.a.input.InputAdapter;
+import idz.a.output.OutputAdapter;
 
 /**
  * @author Bartosz Domin
@@ -10,7 +10,7 @@ import main.java.idz.a.output.OutputAdapter;
 
 public class AppCore {
 
-	static String configPath = "src/main/java/idz/a/core/Config.txt";
+	static String configPath = "project/idz/a/core/Config.txt";
 	static InputAdapter in;
 	static OutputAdapter out;
 	static Configuration conf;
@@ -19,10 +19,10 @@ public class AppCore {
 	static String inputName, outputName;
 	/** 
 	 
-	 * Konstruktor przyjmujï½¹cy za parametr å½¡ieï½¿kï¿½ pliku inicjalizujï½¹cego konfiguracji.
-	 * Tworzy nowï½¹ konfiguracje w oparciu o podanï½¹ å½¡ieï½¿kï¿½.
-	 * Na podstawie konfiguracji ustala rozmiar kolejki logî‰« oraz wejå½¡iowy i wyjå½¡iowy 
-	 * adapter wedï½³ug nazwy.
+	 * Konstruktor przyjmuj¹cy za parametr œcie¿kê pliku inicjalizuj¹cego konfiguracji.
+	 * Tworzy now¹ konfiguracje w oparciu o podan¹ œcie¿kê.
+	 * Na podstawie konfiguracji ustala rozmiar kolejki logów oraz wejœciowy i wyjœciowy 
+	 * adapter wed³ug nazwy.
 	 *  */
 		
 	public AppCore(String path) {
@@ -33,7 +33,7 @@ public class AppCore {
 	}
 	
 	/** 
-	 *  *  Tworzy obiekt adaptera implementujï½¹cego interface 
+	 *  *  Tworzy obiekt adaptera implementuj¹cego interface 
 	 *  InputAdapter o zadanej nazwie.
 	 *  */
 	private static void loadInputAdapter(String name) {
@@ -49,7 +49,7 @@ public class AppCore {
 	}
 	
 	/** 
-	 *  *  Tworzy obiekt adaptera implementujï½¹cego interface 
+	 *  *  Tworzy obiekt adaptera implementuj¹cego interface 
 	 * Output InputAdapter o zadanej nazwie
 	 *  */
 		
@@ -67,19 +67,19 @@ public class AppCore {
 	}
 	/** 
 	
-	 * Wykorzystuje metody ï½³adujï½¹ce adapter wejå½¡iowy i wyjå½¡iowy 
-	 *  ze å½¡ieï½¿ki o zadanej nazwie i powoduje nowï½¹ instancjï¿½ menadï½¿era kolejki
+	 * Wykorzystuje metody ³aduj¹ce adapter wejœciowy i wyjœciowy 
+	 *  ze œcie¿ki o zadanej nazwie i powoduje now¹ instancjê menad¿era kolejki
 	 *  */
 		
 	private static void setUp() {
-		loadInputAdapter("main.java.idz.a.input." + inputName);
-		loadOutputAdapter("main.java.idz.a.output." + outputName);
+		loadInputAdapter("idz.a.input." + inputName);
+		loadOutputAdapter("idz.a.output." + outputName);
 		queue = new QueueManager();
 	}
 	
 	/** 
-	 * *  Inicjalizuje pola adapter wykorzystujï½¹c istniejï½¹cï½¹ konfiguracjï¿½
-	 *  Doï½³ï½¹cza obiekt menadï½¿era kolejki inicjalizuje pola adaptera wyjå½¡iowego
+	 * *  Inicjalizuje pola adapter wykorzystuj¹c istniej¹c¹ konfiguracjê
+	 *  Do³¹cza obiekt menad¿era kolejki inicjalizuje pola adaptera wyjœciowego
 	 *  */
 		
 	private static void invokeAdapterMethods() {
@@ -90,8 +90,8 @@ public class AppCore {
 	
 	/**
 	 *  Tworzy obiekt ApCore
-	 *  Wywoï½³uje  setUp i invokeAdapterMethod
-	 *  oraz wczytuje logi w nieskoîƒŸzonej pé»Žli
+	 *  Wywo³uje  setUp i invokeAdapterMethod
+	 *  oraz wczytuje logi w nieskoñczonej pêtli
 	 *  */
 	public static void main(String[] args) {
 		new AppCore(configPath);

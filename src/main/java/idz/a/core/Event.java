@@ -1,4 +1,4 @@
-package main.java.idz.a.core;
+package idz.a.core;
 
 import java.sql.Timestamp;
 
@@ -8,7 +8,7 @@ import java.sql.Timestamp;
  */
 
 /** 
- *  Przechowuje informacje o czasie, szczegîŠ¦ach, 
+ *  Przechowuje informacje o czasie, szczegó³ach, 
  *  rodzaju loga.
  *  */
 public class Event {
@@ -25,7 +25,7 @@ public class Event {
 	
 	/**  
 	 *  przechowuje typ loga:
-	 *   informacjï¿½,ostrzeï½¿enie, bï½³ï½¹d, naruszenie.
+	 *   informacjê,ostrze¿enie, b³¹d, naruszenie.
 	 *  */
 	public static class Enum {
 		public enum LogLevel {

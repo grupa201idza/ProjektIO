@@ -1,9 +1,9 @@
-package main.java.idz.a.core;
+package idz.a.core;
 
 import java.util.*;
 
-import main.java.idz.a.core.AppCore;
-import main.java.idz.a.output.OutputAdapter;
+import idz.a.core.AppCore;
+import idz.a.output.OutputAdapter;
 
 /**
  * @author Bartosz Domin
@@ -12,8 +12,8 @@ import main.java.idz.a.output.OutputAdapter;
 
 
 /** 
- * Tworzy liste w formie tablicy o okreå¾‘onym rozmiarze, domyå¾žie tablica ma rozmiar zero
- * Posiada wskaæ®¤ik na adapter wyjå½¡iowy.
+ * Tworzy liste w formie tablicy o okreœlonym rozmiarze, domyœnie tablica ma rozmiar zero
+ * Posiada wskaŸnik na adapter wyjœciowy.
  *  */
 public class QueueManager {
 
@@ -23,21 +23,21 @@ public class QueueManager {
 	OutputAdapter output;
 	
 	/** 
-	 *  Podï½³ï½¹cza adapter wyjå½¡iowy
+	 *  Pod³¹cza adapter wyjœciowy
 	 *  */
 	public QueueManager() {
 		connectOutputAdapter();
 	}
 	
 	/** 
-	 * Podï½³ï½¹cza do wyjå½¡ia AppCore
+	 * Pod³¹cza do wyjœcia AppCore
 	 *  */
 	public void connectOutputAdapter() {
 		output = AppCore.out;
 	}
 	/** 
-	 * Akceptuje wydarzenie i informacjï¿½ o w formie zmiennej boolean o
-	 *  powodzeniu lub poraï½¿ce
+	 * Akceptuje wydarzenie i informacjê o w formie zmiennej boolean o
+	 *  powodzeniu lub pora¿ce
 	 *  */
 	public boolean acceptEvent(Event event) {
 		if (currentSize() < batchSize) {
