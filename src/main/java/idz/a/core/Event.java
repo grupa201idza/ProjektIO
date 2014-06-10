@@ -34,15 +34,15 @@ public class Event {
 		};
 	}
 /**
- * 
- *  @return
- *  
+ *Metoda zwracajaca znacznik czasowy
+ * @return znacznik czasowy
  */
 	public Timestamp getTimestamp() {
 		return timestamp;
 	}
 /**
- * 
+ *  ustawia znacznik czasowy
+ * @param timestamp znacznik czasowy
  */
 	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
