@@ -7,6 +7,10 @@ import java.sql.Timestamp;
  * 
  */
 
+/** 
+ *  Przechowuje informacje o czasie, szczegó³ach, 
+ *  rodzaju loga.
+ *  */
 public class Event {
 
 	public Event(Timestamp ts, String det, Enum.LogLevel ll) {
@@ -18,7 +22,11 @@ public class Event {
 	private Timestamp timestamp;
 	private String details;
 	private Enum.LogLevel loglevel;
-
+	
+	/**  
+	 *  przechowuje typ loga:
+	 *   informacjê,ostrze¿enie, b³¹d, naruszenie.
+	 *  */
 	public static class Enum {
 		public enum LogLevel {
 			INFO, WARNING, ERROR, SEVERE
