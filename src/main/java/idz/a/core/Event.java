@@ -3,14 +3,16 @@ package idz.a.core;
 import java.sql.Timestamp;
 
 /**
- * @author Bartosz Domin
+ * 
  * 
  */
 
-/** 
- *  Przechowuje informacje o czasie, szczegó³ach, 
+/**
+ * @author Bartosz Domin 
+ *  Przechowuje informacje o czasie, szczegolach, 
  *  rodzaju loga.
- *  */
+ * 
+ */
 public class Event {
 
 	public Event(Timestamp ts, String det, Enum.LogLevel ll) {
@@ -23,36 +25,50 @@ public class Event {
 	private String details;
 	private Enum.LogLevel loglevel;
 	
-	/**  
-	 *  przechowuje typ loga:
-	 *   informacjê,ostrze¿enie, b³¹d, naruszenie.
-	 *  */
+	/**
+	 *  Przechowuje typ loga:
+	 *   informacje,ostrzezenie, blad, naruszenie. 
+	 */
 	public static class Enum {
 		public enum LogLevel {
 			INFO, WARNING, ERROR, SEVERE
 		};
 	}
-
+/**
+ * 
+ *  @return
+ *  
+ */
 	public Timestamp getTimestamp() {
 		return timestamp;
 	}
-
+/**
+ * 
+ */
 	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
 	}
-
+/**
+ * @return
+ */
 	public String getDetails() {
 		return details;
 	}
-
+/**
+ * 
+ */
 	public void setDetails(String details) {
 		this.details = details;
 	}
-
+/**
+ * @return
+ */
 	public Enum.LogLevel getLoglevel() {
 		return loglevel;
 	}
-
+/**
+ * @return
+ */
 	public void setLoglevel(Enum.LogLevel loglevel) {
 		this.loglevel = loglevel;
 	}
