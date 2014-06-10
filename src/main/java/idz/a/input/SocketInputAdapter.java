@@ -14,8 +14,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-// test
-
 /**
  * SocketInputAdapter class.
  *
@@ -33,7 +31,6 @@ public class SocketInputAdapter implements InputAdapter {
 		 */
 		public SocketInputAdapter() {
 			super();
-			port = Configuration.getInputSocket();
 		}
 		/**
 		 * Method parses line's content and adds event to queue.
@@ -178,6 +175,8 @@ new InputStreamReader(socket.getInputStream()));
 	 */
 	public final void setupConfig(final Configuration config) {
 		this.config = config;
+		port = config.getInputSocket();
+
 	}
 
 	/**
