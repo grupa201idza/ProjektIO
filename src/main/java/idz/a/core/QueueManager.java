@@ -21,10 +21,10 @@ public class QueueManager {
 	private static List<Event> queue = new ArrayList<Event>();
 
 	OutputAdapter output;
-	
-	/** 
-	 *  Pod³¹cza adapter wyjœciowy
-	 *  */
+/**
+ * 	
+ *  Podlacza adapter wyjsciowy
+ */
 	public QueueManager() {
 		connectOutputAdapter();
 	}
@@ -33,15 +33,17 @@ public class QueueManager {
 		batchSize=size;
 	}
 	
-	/** 
-	 * Pod³¹cza do wyjœcia AppCore
-	 *  */
+		/** 
+		 * Podlacza do wyjscia AppCore
+		 *  */
 	public void connectOutputAdapter() {
 		output = AppCore.out;
 	}
+	
 	/** 
 	 * Akceptuje wydarzenie i informacjê o w formie zmiennej boolean o
 	 *  powodzeniu lub pora¿ce
+	 *  @return powodzenie lub porazka
 	 *  */
 	public boolean acceptEvent(Event event) {
 		if (currentSize() < batchSize) {
@@ -50,7 +52,10 @@ public class QueueManager {
 		} else
 			return false;
 	}
-
+	/**
+	 * Wysy³a wydarzenie i zwraca informacje o powodzeniu
+	 * @return wartocs boolean czy sie udalo
+	 */
 	public boolean sendEvents() {
 		if (output.storeEvents(queue)) {
 			removeEvents();
@@ -58,11 +63,16 @@ public class QueueManager {
 		} else
 			return false;
 	}
-
+	/**
+	 * Usuwa wydarzenie
+	 */
 	private void removeEvents() {
 		queue.remove(0);
 	}
-
+	/**
+	 * 
+	 * @return rozmiar kolejki
+	 */
 	public int currentSize() {
 		return queue.size();
 	}
