@@ -18,9 +18,15 @@ import idz.a.core.Event;
  * As for tests: setupConfig with null Configuration and null outputFilePath will be safe
  * 				storeEvents will not check if has place for other files
  */
+/**
+ * Klasa adatera wyjsciowego do pliku.
+ */
 public class FileOutputAdapter implements OutputAdapter {
 
 	private String outputFilePath;
+/**
+	 * konstruktor adaptera
+	 */
 
 	FileOutputAdapter(Configuration config){
 		//setupConfig(config);
@@ -30,6 +36,9 @@ public class FileOutputAdapter implements OutputAdapter {
 	 * Applies valid configuration
 	 */
 	@Override
+	/**
+	 * Metoda z interfejsu, sprawdza czy sciezka pliku jest nie pusta
+	 */
 	public void setupConfig(idz.a.core.Configuration config) {
 		try {
 			if (config != null & Configuration.getOutputFilePath() != null)
@@ -47,6 +56,9 @@ public class FileOutputAdapter implements OutputAdapter {
 	 * method theorically able to create needed file if it do not exists
 	 */
 	@Override
+	/**
+	Sprawdza czy pliki istnieje, je¿eli nie tworzy go. Pozniej dopisuje logi do pliku
+	*/
 	public boolean storeEvents(List<Event> batch) {
 		File storageFile = new File(outputFilePath);
 		if (!storageFile.exists()) {

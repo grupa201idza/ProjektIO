@@ -12,7 +12,9 @@ import java.sql.Statement;
 
 import idz.a.core.Configuration;
 import idz.a.core.Event;
-
+/**
+ * Klasa nawiazuje polaczenie z baza danych oraz dopisuje do niej logi
+ */
 public class DBOutputAdapter implements OutputAdapter {
 
 	private int port;
@@ -29,6 +31,9 @@ public class DBOutputAdapter implements OutputAdapter {
 	}
 
 	@Override
+	/**
+	 * Pobiera z konfiguracji dane dla funkcjonowania adaptera
+	 */
 	public void setupConfig(Configuration config) {
 		  login = config.getDBLogin(); 
 		  password = config.getDBPassword(); 
@@ -38,6 +43,9 @@ public class DBOutputAdapter implements OutputAdapter {
 	}
 
 	@Override
+	/**
+	 * Wstawia w tabelê logow nowy wiersz zawierajacy dane loga
+	 */
 	public boolean storeEvents(List<Event> batch) {
 		PreparedStatement stmt = null;
 		sql = "INSERT INTO "+ table +" (TIMESTAMP, DETAILS, LOGLEVEL) VALUES (?, ?, ?)";
@@ -69,7 +77,9 @@ public class DBOutputAdapter implements OutputAdapter {
 		}
 		return false;
 	}
-
+/**
+ * Laczy ze zrod³em. Wyswietla informacje o sukcesie lub porazce polaczenia.
+ */
 	public boolean connectToSource() {
 		System.out.println("Connecting to database...");
 		connection = getConnection();
@@ -83,7 +93,9 @@ public class DBOutputAdapter implements OutputAdapter {
 		}
 		return false;
 	}
-
+/**
+ * * Metoda zwracajaca polaczenie z baza danych.
+ */
 	public Connection getConnection() {
 		Connection connection = null;
 		String jdbcClassName = "com.ibm.db2.jcc.DB2Driver";

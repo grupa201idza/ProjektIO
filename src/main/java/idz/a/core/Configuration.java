@@ -11,6 +11,11 @@ import java.util.Properties;
  * 
  */
 
+
+/**
+ *  Klasa przechowuj¹ca dane konfiguracyjne dla
+ *  adapterow wejœciowych i wyjsciowych oraz funkcjonowania programu
+ */
 public class Configuration {
 
 	private static String inputAdapter, outputAdapter, inputFilePath,
@@ -18,7 +23,15 @@ public class Configuration {
 	private static int inputSocket, batchSize, DBPort;
 	Properties prop = new Properties();
 	InputStream input = null;
-
+	
+	/**
+	 * Inicjalizacja instancji konfiguracji poprzez odwolanie 
+	 *  siê do pliku znajduj¹cego sie na sciezce przekazanej w 
+	 *  lancuchu jako parametr konstruktora
+	 *  Wykorzystanie klase property do zebrania danych z pliku tekstowego
+	 *   przechowuj¹cego dane konfiguracyjne.
+	 *   W razie b³êdu zamyka kana³ wejœciowy plik
+	 */
 	public Configuration(String path) {
 
 		try {
@@ -52,19 +65,29 @@ public class Configuration {
 			}
 		}
 	}
-
+	
+	/** 
+	 *  Zwraca ³añcuch z nazw¹ wybranego adaptera wejœciowego
+	 *  */
 	public static String getInputAdapter() {
 		return inputAdapter;
 	}
-
+	
+	/** 
+	 *  Zwraca ³añcuch z nazw¹ wybranego adaptera wyjœciowego
+	 *  */
 	public static String getOutputAdapter() {
 		return outputAdapter;
 	}
-
+	/** 
+	 *  Zwraca ³añcuch z œcie¿k¹ pliku dla adaptera wejœciowego
+	 *  */
 	public static String getInputFilePath() {
 		return inputFilePath;
 	}
-
+	/** 
+	 *  Zwraca ³añcuch z œcie¿k¹ pliku dla adaptera wyjœciowego
+	 *  */
 	public static String getOutputFilePath() {
 		return outputFilePath;
 	}
