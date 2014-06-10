@@ -12,10 +12,10 @@ import java.util.Properties;
  */
 
 
-/** 
+/**
  *  Klasa przechowuj¹ca dane konfiguracyjne dla
- *   adapterów wejœciowych i wyjœciowych oraz funkcjonowania programu
- *  */	
+ *  adapterow wejœciowych i wyjsciowych oraz funkcjonowania programu
+ */
 public class Configuration {
 
 	private static String inputAdapter, outputAdapter, inputFilePath,
@@ -24,15 +24,14 @@ public class Configuration {
 	Properties prop = new Properties();
 	InputStream input = null;
 	
-	/** 
-	 * Inicjalizacja instancji konfiguracji poprzez odwo³anie 
-	 *  siê do pliku znajduj¹cego siê na œcie¿ce przekazanej w 
-	 *  ³añcuchu jako parametr konstruktora
-	 *  Wykorzystanie klasê property do zebrania danych z pliku tekstowego
+	/**
+	 * Inicjalizacja instancji konfiguracji poprzez odwolanie 
+	 *  siê do pliku znajduj¹cego sie na sciezce przekazanej w 
+	 *  lancuchu jako parametr konstruktora
+	 *  Wykorzystanie klase property do zebrania danych z pliku tekstowego
 	 *   przechowuj¹cego dane konfiguracyjne.
-	 *   W razie b³êdu zamyka kana³ wejœciowy pliku
-	  *  */
-		
+	 *   W razie b³êdu zamyka kana³ wejœciowy plik
+	 */
 	public Configuration(String path) {
 
 		try {
