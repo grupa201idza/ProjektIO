@@ -8,7 +8,9 @@ import java.sql.Timestamp;
 import idz.a.core.Event;
 
 import org.junit.Test;
-
+/**
+ * 
+ */
 public class FileInputAdapterTest {
 
 	private FileInputAdapter fia = new FileInputAdapter(44);
@@ -16,18 +18,27 @@ public class FileInputAdapterTest {
 	private final Event event2 = fia.parseEvent(getLog2());
 
 	@Test
+	/**
+	 * Klasa testowa testujaca FileInputAdapter
+	 */
 	public void typeTest1() {
 		assertTrue("Error - object is not Event",
 				fia.parseEvent(getLog1()) instanceof Event);
 	}
 
 	@Test
+	/**
+	 * 
+	 */
 	public void timestampTest1() {
 		assertTrue("Error - object is not Timestamp",
 				event1.getTimestamp() instanceof Timestamp);
 	}
 
 	@Test
+	/**
+	 * 
+	 */
 	public void loglevelTest1() {
 		assertTrue("Error - object is not Loglevel",
 				event1.getLoglevel()
@@ -35,42 +46,63 @@ public class FileInputAdapterTest {
 	}
 
 	@Test
+	/**
+	 * 
+	 */
 	public void detailsTest1() {
 		assertTrue("Error - object is not String",
 				event1.getDetails() instanceof String);
 	}
 
 	@Test
+	/**
+	 * 
+	 */
 	public void timestampValue1() {
 		assertEquals("Values are equal",
 				getTimestamp1(), event1.getTimestamp());
 	}
 
 	@Test
+	/**
+	 * 
+	 */
 	public void loglevelValue1() {
 		assertEquals("Values are equal",
 				getLoglevel1(), event1.getLoglevel());
 	}
 
 	@Test
+	/**
+	 * 
+	 */
 	public void detailsValue1() {
 		assertEquals("Values are equal",
 				getDetails1(), event1.getDetails());
 	}
 
 	@Test
+	/**
+	 * 
+	 */
 	public void typeTest2() {
 		assertTrue("Error - object is not Event",
 				fia.parseEvent(getLog2()) instanceof Event);
 	}
 
 	@Test
+	/**
+	 * 
+	 */
 	public void timestampTest2() {
 		assertTrue("Error - object is not Timestamp",
 				event2.getTimestamp() instanceof Timestamp);
 	}
 
 	@Test
+	/**
+	 * 
+	 */
 	public void loglevelTest2() {
 		assertTrue("Error - object is not Loglevel",
 				event2.getLoglevel()
@@ -78,36 +110,52 @@ public class FileInputAdapterTest {
 	}
 
 	@Test
+	/**
+	 * 
+	 */
 	public void detailsTest2() {
 		assertTrue("Error - object is not String",
 				event2.getDetails() instanceof String);
 	}
 
 	@Test
+	/**
+	 * 
+	 */
 	public void timestampValue2() {
 		assertEquals("Values are equal",
 				getTimestamp2(), event2.getTimestamp());
 	}
 
 	@Test
+	/**
+	 * 
+	 */
 	public void loglevelValue2() {
 		assertEquals("Values are equal",
 				getLoglevel2(), event2.getLoglevel());
 	}
 
 	@Test
+	/**
+	 * 
+	 */
 	public void detailsValue2() {
 		assertEquals("Values are equal",
 				getDetails2(), event2.getDetails());
 	}
-
+/**
+ * 
+ */
 	private String getLog1() {
 		return "(2014-05-22T07:25:25.0912) INFO [org.jboss."
 				+ "stdio.AbstractLoggingWriter.write("
 				+ "AbstractLoggingWriter.java:71)] (default"
 				+ " task-2) cwmp NS =urn:dslforum-org:cwmp-1-1";
 	}
-
+/**
+ * @return
+ */
 	private Timestamp getTimestamp1() {
 		return Timestamp.valueOf("2014-05-22 07:25:25.0912");
 	}
