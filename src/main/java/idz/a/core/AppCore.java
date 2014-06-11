@@ -15,7 +15,7 @@ public class AppCore {
 	static OutputAdapter out;
 	static Configuration conf;
 	static QueueManager queue;
-	int batchSize = 0;
+	static int batchSize = 0;
 	static int countIn = 0, countOut = 0;
 	static String inputName, outputName;
 
@@ -35,10 +35,11 @@ public class AppCore {
 	}
 
 	/**
-	 * Tworzy obiekt adaptera implementujacego interface InputAdapter o
-	 * zadanej nazwie.
+	 * Tworzy obiekt adaptera implementujacego interface InputAdapter o zadanej
+	 * nazwie.
 	 * 
-	 * @param name  nazwa interfejsu
+	 * @param name
+	 *            nazwa interfejsu
 	 */
 	private static void loadInputAdapter(String name) {
 
@@ -56,7 +57,8 @@ public class AppCore {
 	 * Tworzy obiekt adaptera implementujacego interfejs Output InputAdapter o
 	 * zadanej nazwie
 	 * 
-	 * @param name nazwa parametru
+	 * @param name
+	 *            nazwa parametru
 	 */
 	private static void loadOutputAdapter(String name) {
 
@@ -72,20 +74,20 @@ public class AppCore {
 	}
 
 	/**
-	 * Wykorzystuje metody ladujace adapter wejsciowy i wyjsciowy ze
-	 * sciezki o zadanej nazwie i powoduje nowa instancj� instancj� menadzera 
-	 * kolejki
+	 * Wykorzystuje metody ladujace adapter wejsciowy i wyjsciowy ze sciezki o
+	 * zadanej nazwie i powoduje nowa instancj�ｿｽ instancj� menadzera kolejki
 	 * */
 	private static void setUp() {
 		loadInputAdapter("idz.a.input." + inputName);
 		loadOutputAdapter("idz.a.output." + outputName);
 		queue = new QueueManager();
 		queue.setBatchSize(conf.getBatchSize());
+		batchSize = conf.getBatchSize();
 	}
 
 	/**
-	 * Inicjalizuje pola adapter wykorzystujac istniejaca konfiguracje
-	 * Dolacza obiekt menadzera kolejki inicjalizuje pola adaptera wyjsciowego
+	 * Inicjalizuje pola adapter wykorzystujac istniejaca konfiguracje Dolacza
+	 * obiekt menadzera kolejki inicjalizuje pola adaptera wyjsciowego
 	 */
 	private static void invokeAdapterMethods() {
 		in.setupConfig(conf);
@@ -99,34 +101,37 @@ public class AppCore {
 	 * 
 	 * @param args
 	 */
-public static void main(String[] args) {
+	public static void main(String[] args) {
 		new AppCore(configPath);
 		setUp();
 		invokeAdapterMethods();
 		while (true) {
-			if(countIn>9 || countOut>9)
+			if (countIn > 10 || countOut > 10)
 				break;
-			if (!in.readLog()) {
-				try {
-					Thread.sleep(500);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				countIn++;
+			if (queue.currentSize() < batchSize) {
+				if (!in.readLog()) {
+					try {
+						Thread.sleep(1500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					countIn++;
+				} else
+					countIn = 0;
 			} else
-				countIn=0;
-			if (queue.currentSize()>0){
-			if (!queue.sendEvents()) {
-				try {
-					Thread.sleep(500);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				countOut++;
+				System.out.println("Queue is full");
+			if (queue.currentSize() > 0) {
+				if (!queue.sendEvents()) {
+					try {
+						Thread.sleep(1500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					countOut++;
+				} else
+					countOut = 0;
 			} else
-				countOut=0;
-		}
+				System.out.println("Queue is empty");
 		}
 	}
 }
-
