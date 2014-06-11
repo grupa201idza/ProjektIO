@@ -62,7 +62,7 @@ public class FileOutputAdapter implements OutputAdapter {
 	@return 
 	*/
 	public boolean storeEvents(List<Event> batch) {
-		connectToDestination();
+		if(connectToDestination())
 		/*
 		 * main executive part of method if given real file and program has
 		 * rights to write in it then it starts storing Events
