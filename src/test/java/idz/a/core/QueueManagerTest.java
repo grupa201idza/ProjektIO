@@ -31,7 +31,7 @@ public class QueueManagerTest {
 	 * Zwrócona wartosc typu boolean: true 
 	 */
 	
-	public void test() {
+	public void acceptEventTest1() {
 		
 		/**
 		 * Ustawianie kolejki wed³ug pliku konfiguracyjnego
@@ -65,6 +65,55 @@ public class QueueManagerTest {
 		 */
 		
 		assertEquals( "Accept Event", true, manager.acceptEvent(sample[numberOfEvents-1]));
+		
+	}
+	
+	@Test
+	
+	/**
+	 * Test metody acceptEvent klasy QuereManager
+	 * Test 2:
+	 * Przypadek, w którym aktualna ilosc batchy jest wype³niona do ilosci maksymalnej,
+	 * i dochodzi nastepny Event.
+	 * Oczekiwany rezultat:
+	 * Zwrócona wartosc typu boolean: false 
+	 */
+	
+	public void acceptEventTest2() {
+		
+		/**
+		 * Ustawianie kolejki wed³ug pliku konfiguracyjnego
+		 */
+		
+	manager.setBatchSize(conf.getBatchSize());
+	
+	/**
+	 * Tworzenie 11 przyk³adowych obiektow klasy Event
+	 */
+	
+	int numberOfEvents = 11;
+	
+	Event[] sample = new Event[numberOfEvents];
+	
+	for (int counter = 0; counter < numberOfEvents; counter++) {
+		
+		sample[counter] = new Event( null, exampleString, null);
+		
+	}
+		for ( int t2 = 0; t2 < numberOfEvents-1; t2++) {
+		
+			manager.acceptEvent(sample[t2]);
+			
+		}
+	
+		/**
+		 * Kluczowy moment testu:
+		 * W tym momencie kolejka jest juz przepelniona.
+		 * Nastepuje dojscie kolejnego Eventu
+		 * Oczekiwana wartosc zwrotna metody: false
+		 */
+		
+		assertEquals( "Reject Event", false, manager.acceptEvent(sample[numberOfEvents-1]));
 		
 	}
 
