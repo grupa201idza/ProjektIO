@@ -24,6 +24,7 @@ import idz.a.core.Event;
 public class FileOutputAdapter implements OutputAdapter {
 
 	private String outputFilePath;
+	private File storageFile;
      /**
 	 * konstruktor adaptera
 	 */
@@ -61,18 +62,7 @@ public class FileOutputAdapter implements OutputAdapter {
 	@return 
 	*/
 	public boolean storeEvents(List<Event> batch) {
-		File storageFile = new File(outputFilePath);
-		if (!storageFile.exists()) {
-			storageFile.mkdirs();
-			try {
-				storageFile.createNewFile();
-			} catch (IOException e) {
-				System.out
-						.println("Target file not exists yet it was impossible to create it");
-				e.printStackTrace();
-				return false;
-			}
-		}
+		connectToDestination();
 		/*
 		 * main executive part of method if given real file and program has
 		 * rights to write in it then it starts storing Events
@@ -108,5 +98,26 @@ public class FileOutputAdapter implements OutputAdapter {
 
 		return false;
 	}
-
+	/**
+	 * checks file existence if file is non-existent creates it
+	 * @return succes or fail with creating connection with existing file
+	 */
+	boolean connectToDestination(){
+		storageFile = new File(outputFilePath);
+		if(storageFile.getPath()!=null){
+		if (!storageFile.exists()) {
+			storageFile.mkdirs();
+			try {
+				storageFile.createNewFile();
+			} catch (IOException e) {
+				System.out
+						.println("Target file not exists yet it was impossible to create it");
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return true;
+		}
+		else return false;
+	}
 }
