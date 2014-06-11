@@ -12,6 +12,11 @@ import org.junit.Test;
 
 public class QueueManagerTest {
 	
+	/**
+	 * Utworzenie pliku konfiguracyjnego oraz Obiektu klasy QueueManager,
+	 * ktory bedzie poddawany testom.
+	 */
+	
 	static String configPath = "src/main/java/idz/a/core/Config.txt";
 	
 	Configuration conf = new Configuration(configPath);
@@ -28,30 +33,31 @@ public class QueueManagerTest {
 	 * Test 1:
 	 * Przypadek, w którym aktualna ilosc batchy jest mniejsza od ilosci maksymalnej.
 	 * Oczekiwany rezultat:
-	 * Zwrócona wartosc typu boolean: true 
+	 * Zwrocona wartosc typu boolean: true 
 	 */
 	
 	public void acceptEventTest1() {
 		
 		/**
-		 * Ustawianie kolejki wed³ug pliku konfiguracyjnego
+		 * Ustawianie kolejki wedlug pliku konfiguracyjnego
 		 */
 		
-	manager.setBatchSize(conf.getBatchSize());
+		manager.setBatchSize(conf.getBatchSize());
 	
-	/**
-	 * Tworzenie 7 przyk³adowych obiektow klasy Event
-	 */
+		/**
+		 * Tworzenie 7 przykladowych obiektow klasy Event
+		 */
 	
-	int numberOfEvents = 7;
+		int numberOfEvents = 7;
 	
-	Event[] sample = new Event[numberOfEvents];
+		Event[] sample = new Event[numberOfEvents];
 	
-	for (int counter = 0; counter < numberOfEvents; counter++) {
+		for (int counter = 0; counter < numberOfEvents; counter++) {
 		
-		sample[counter] = new Event( null, exampleString, null);
+			sample[counter] = new Event( null, exampleString, null);
 		
-	}
+		}
+		
 		for ( int t1 = 0; t1 < numberOfEvents-1; t1++) {
 		
 			manager.acceptEvent(sample[t1]);
@@ -60,7 +66,7 @@ public class QueueManagerTest {
 			
 		/**
 		 * Kluczowy moment testu:
-		 * Sprawdzanie odpowiedzi metody acceptEvent przez kolejne 10 powtorzen,
+		 * Sprawdzanie odpowiedzi metody acceptEvent,
 		 * gdzie oczekiwana odpowiedzia jest wartosc true
 		 */
 		
@@ -76,30 +82,31 @@ public class QueueManagerTest {
 	 * Przypadek, w którym aktualna ilosc batchy jest wype³niona do ilosci maksymalnej,
 	 * i dochodzi nastepny Event.
 	 * Oczekiwany rezultat:
-	 * Zwrócona wartosc typu boolean: false 
+	 * Zwrocona wartosc typu boolean: false 
 	 */
 	
 	public void acceptEventTest2() {
 		
 		/**
-		 * Ustawianie kolejki wed³ug pliku konfiguracyjnego
+		 * Ustawianie kolejki wedlug pliku konfiguracyjnego
 		 */
 		
-	manager.setBatchSize(conf.getBatchSize());
+		manager.setBatchSize(conf.getBatchSize());
 	
-	/**
-	 * Tworzenie 11 przyk³adowych obiektow klasy Event
-	 */
+		/**
+		 * Tworzenie 11 przykladowych obiektow klasy Event
+		 */
 	
-	int numberOfEvents = 11;
+		int numberOfEvents = 11;
 	
-	Event[] sample = new Event[numberOfEvents];
+		Event[] sample = new Event[numberOfEvents];
 	
-	for (int counter = 0; counter < numberOfEvents; counter++) {
+		for (int counter = 0; counter < numberOfEvents; counter++) {
 		
-		sample[counter] = new Event( null, exampleString, null);
+			sample[counter] = new Event( null, exampleString, null);
 		
-	}
+		}
+		
 		for ( int t2 = 0; t2 < numberOfEvents-1; t2++) {
 		
 			manager.acceptEvent(sample[t2]);
@@ -108,8 +115,8 @@ public class QueueManagerTest {
 	
 		/**
 		 * Kluczowy moment testu:
-		 * W tym momencie kolejka jest juz przepelniona.
-		 * Nastepuje dojscie kolejnego Eventu
+		 * W tym momencie kolejka jest juz przepelniona 
+		 * i nastepuje dojscie kolejnego Eventu
 		 * Oczekiwana wartosc zwrotna metody: false
 		 */
 		
@@ -120,35 +127,37 @@ public class QueueManagerTest {
 	@Test
 	
 	/**
-	 * Test metody sendEvent klasy QuereManager
+	 * Test metody sendEvents klasy QuereManager
 	 * Test 3:
-	 * Przypadek, w którym aktualna ilosc batchy jest mniejsza od ilosci maksymalnej.
+	 * Przypadek, w którym kolejka zostaje zapelniona,
+	 * poczym dziala metoda sendEvents.
 	 * Oczekiwany rezultat:
-	 * Zwrócona wartosc typu boolean: true 
+	 * Ilosc Eventow po dzialaniu metody sendEvents wynosi 0
 	 */
 	
-	public void sendEventTest1() {
+	public void sendEventsTest1() {
 		
 		/**
-		 * Ustawianie kolejki wed³ug pliku konfiguracyjnego
+		 * Ustawianie kolejki wedlug pliku konfiguracyjnego
 		 */
 		
-	manager.setBatchSize(conf.getBatchSize());
+		manager.setBatchSize(conf.getBatchSize());
 	
-	/**
-	 * Tworzenie 10 przyk³adowych obiektow klasy Event
-	 */
+		/**
+		 * Tworzenie 10 przykladowych obiektow klasy Event
+		 */
 	
-	int numberOfEvents = 10;
+		int numberOfEvents = 10;
 	
-	Event[] sample = new Event[numberOfEvents];
+		Event[] sample = new Event[numberOfEvents];
 	
-	for (int counter = 0; counter < numberOfEvents; counter++) {
+		for (int counter = 0; counter < numberOfEvents; counter++) {
 		
-		sample[counter] = new Event( null, exampleString, null);
+			sample[counter] = new Event( null, exampleString, null);
 		
-	}
-		for ( int t3 = 0; t3 < numberOfEvents-1; t3++) {
+		}
+		
+		for ( int t3 = 0; t3 < numberOfEvents; t3++) {
 		
 			manager.acceptEvent(sample[t3]);
 			
@@ -159,11 +168,11 @@ public class QueueManagerTest {
 		/**
 		 * Kluczowy moment testu:
 		 * Sprawdzanie poprawnosci dzialania metody
-		 * sendEvent
+		 * sendEvents
 		 * Oczekiwana ilosc obiektow typu Event po wywolaniu metody: 0
 		 */
 	
-		assertEquals("Number of Events must be 0", 0, manager.currentSize());
+		assertEquals("Number of Events must be 0", null, manager.currentSize());
 		
 	}
 	
