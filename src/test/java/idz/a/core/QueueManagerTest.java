@@ -117,4 +117,54 @@ public class QueueManagerTest {
 		
 	}
 
+	@Test
+	
+	/**
+	 * Test metody sendEvent klasy QuereManager
+	 * Test 3:
+	 * Przypadek, w którym aktualna ilosc batchy jest mniejsza od ilosci maksymalnej.
+	 * Oczekiwany rezultat:
+	 * Zwrócona wartosc typu boolean: true 
+	 */
+	
+	public void sendEventTest1() {
+		
+		/**
+		 * Ustawianie kolejki wed³ug pliku konfiguracyjnego
+		 */
+		
+	manager.setBatchSize(conf.getBatchSize());
+	
+	/**
+	 * Tworzenie 10 przyk³adowych obiektow klasy Event
+	 */
+	
+	int numberOfEvents = 10;
+	
+	Event[] sample = new Event[numberOfEvents];
+	
+	for (int counter = 0; counter < numberOfEvents; counter++) {
+		
+		sample[counter] = new Event( null, exampleString, null);
+		
+	}
+		for ( int t3 = 0; t3 < numberOfEvents-1; t3++) {
+		
+			manager.acceptEvent(sample[t3]);
+			
+		}
+		
+		manager.sendEvents();
+		
+		/**
+		 * Kluczowy moment testu:
+		 * Sprawdzanie poprawnosci dzialania metody
+		 * sendEvent
+		 * Oczekiwana ilosc obiektow typu Event po wywolaniu metody: 0
+		 */
+	
+		assertEquals("Number of Events must be 0", 0, manager.currentSize());
+		
+	}
+	
 }
