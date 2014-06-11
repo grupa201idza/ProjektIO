@@ -41,9 +41,9 @@ public class FileOutputAdapter implements OutputAdapter {
 	 */
 	public void setupConfig(idz.a.core.Configuration config) {
 		try {
-			if (config != null & Configuration.getOutputFilePath() != null)
-				this.outputFilePath = Configuration.getOutputFilePath();
-			else if (Configuration.getOutputFilePath() == null)
+			if (config != null & config.getOutputFilePath() != null)
+				this.outputFilePath = config.getOutputFilePath();
+			else if (config.getOutputFilePath() == null)
 				throw new Exception(
 						"Denied: Tried to apply UnindentifiedFilePath");
 
