@@ -35,14 +35,6 @@ public class FileInputAdapter implements InputAdapter {
 		super();
 	}
 
-	/**Konstruktor FileInputAdapter dla testowania wyników
-	 * @param test garbage parameter
-	 
-	 */
-	public FileInputAdapter(final int test) {
-		super();
-	}
-
 	/**
 	 * Returns Path from given String path.
 	 *
@@ -192,14 +184,14 @@ public class FileInputAdapter implements InputAdapter {
 	public void closeScanner(final Scanner scan) {
 		scan.close();
 	}
-
+	
 	/**
 	 * Setups Configuration object.
 	 *
 	 * @param configCon
 	 *            Configuration object
 	 */
-	public final void setupConfig(final Configuration configCon) {
+	public void setupConfig(final Configuration configCon) {
 		config = configCon;
 		logPath = config.getInputFilePath();
 		isConnected = connectToSource();
@@ -211,7 +203,7 @@ public class FileInputAdapter implements InputAdapter {
 	 * @param queueMan
 	 *            QueueManager object
 	 */
-	public final void connectToQueueManager(final QueueManager queueMan) {
+	public void connectToQueueManager(final QueueManager queueMan) {
 		this.queue = queueMan;
 	}
 
