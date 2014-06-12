@@ -39,7 +39,7 @@ public class FileInputAdapter implements InputAdapter {
 	 * Returns Path from given String path.
 	 *
 	 * @param fileName
-	 *            full name of an existing, readable file
+	 *   pelna nazwa 
 	 * @return resulting Path from given String
 	 */
 	private Path getPath(final String fileName) {
@@ -166,19 +166,18 @@ public class FileInputAdapter implements InputAdapter {
 	/**
 	 * Trims formated date.
 	 *
-	 * @param logDate
-	 *            date to trim
-	 * @return trimmed log date
+	 * @param logDate - data do sformatowania
+	 * 
+	 * @return - sformatowana datalogu
 	 */
 	private String dateTrim(final String logDate) {
 		return logDate.trim();
 	}
 
 	/**
-	 * Closes Scanner object.
+	 * Zamkniecie obiektu skanera.
 	 *
-	 * @param scan
-	 * 			  Scanner object to close
+	 * @param scan obiekt Scanner do zamkniêcia
 	 *
 	 */
 	public void closeScanner(final Scanner scan) {
@@ -186,10 +185,9 @@ public class FileInputAdapter implements InputAdapter {
 	}
 	
 	/**
-	 * Setups Configuration object.
+	 * Konfiguracja obiektu Configuration .
 	 *
-	 * @param configCon
-	 *            Configuration object
+	 * @param configCon obiekt Configuration 
 	 */
 	public void setupConfig(final Configuration configCon) {
 		config = configCon;
@@ -198,10 +196,9 @@ public class FileInputAdapter implements InputAdapter {
 	}
 
 	/**
-	 * Setups QueueManager object.
+	 * Obiekt konfiguracji QueueManager.
 	 *
-	 * @param queueMan
-	 *            QueueManager object
+	 * @param queueMan - obiekt QueueManager 
 	 */
 	public void connectToQueueManager(final QueueManager queueMan) {
 		this.queue = queueMan;
