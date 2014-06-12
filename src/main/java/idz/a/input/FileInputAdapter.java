@@ -36,20 +36,18 @@ public class FileInputAdapter implements InputAdapter {
 	}
 
 	/**
-	 * Returns Path from given String path.
+	 * Zwraca sciezke z String path.
 	 *
-	 * @param fileName
-	 *   pelna nazwa 
-	 * @return resulting Path from given String
+	 * @param fileName -  pelna nazwa 
+	 * @return zwraca otrzymany wynik
 	 */
 	private Path getPath(final String fileName) {
 		return Paths.get(fileName);
 	}
 
 	/**
-	 * Checks if given log file path exists.
-	 *
-	 * @return true if connected to source; false if not connected to source
+	 *Sprawdza, czy istnieje podana œcie¿ka w  pliku loga. 
+	 * @return true je¿eli pod³¹czono do Ÿród³a lub false jeœli nie pod³aczono.
 	 */
 	private boolean connectToSource() {
 		int connAttempts = 0;
@@ -69,7 +67,7 @@ public class FileInputAdapter implements InputAdapter {
 	}
 
 	/**
-	 * Reads log file line by line.
+	 * Czyta liniam plik logu.
 	 */
 	public boolean readLog() {
 		if (isConnected) {
@@ -153,9 +151,9 @@ public class FileInputAdapter implements InputAdapter {
 	}
 
 	/**
-	 * Formats given String log date.
+	 * Formatuje otrzymanya date z logu
 	 *
-	 * @param logDate - String date to format
+	 * @param logDate - data z logu do formatowania
 	 * @return data w formacie zgodnym z Timestamp
 	 */
 	private String dateReplace(final String logDate) {
