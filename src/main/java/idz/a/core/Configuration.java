@@ -147,14 +147,14 @@ public class Configuration {
 	}
 /**
  * 
- * @return Zwraca tabele
+ * @return Zwraca tabele.
  */
 	public String getDBTable() {
 		return DBTable;
 	}
 /**
  * 
- * @return Zwraca port
+ * @return Zwraca port.
  */ 
 	public int getDBPort() {
 		return DBPort;
