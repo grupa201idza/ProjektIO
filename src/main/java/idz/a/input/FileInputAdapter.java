@@ -99,12 +99,12 @@ public class FileInputAdapter implements InputAdapter {
 	}
 
 	/**
-	 * Parses line's content to Event.
+
+	 * Analizuje zawartoœæ lini do wydarzenia.
 	 *
-	 * @param log
-	 *            scanned line from log file
-	 * @return parsed Event object
-	 * or null if meets empty or invalid line in log file
+	 * @param log -  skanowana linia z pliku loga 
+	 * @return analizowany obiekt Event 
+     * lub niewazny, jeœli jest pusta lub nieprawid³ow¹ linia w pliku loga
 	 */
 	public final Event parseEvent(final String log) {
 		final Scanner scan = new Scanner(log);
@@ -155,16 +155,15 @@ public class FileInputAdapter implements InputAdapter {
 	/**
 	 * Formats given String log date.
 	 *
-	 * @param logDate
-	 *            String date to format
-	 * @return date in format compatible with Timestamp
+	 * @param logDate - String date to format
+	 * @return data w formacie zgodnym z Timestamp
 	 */
 	private String dateReplace(final String logDate) {
 		return logDate.replaceAll("[(T)]", " ");
 	}
 
 	/**
-	 * Trims formated date.
+	 *Obiekt formatujacy date
 	 *
 	 * @param logDate - data do sformatowania
 	 * 
