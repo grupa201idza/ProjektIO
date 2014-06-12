@@ -126,7 +126,7 @@ public class Configuration {
 	}
 /**
  * 
- * @return Zwraca login
+ * @return Zwraca login.
  */
 	public String getDBLogin() {
 		return DBLogin;
