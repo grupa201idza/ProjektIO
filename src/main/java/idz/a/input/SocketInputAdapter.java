@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- *Klasa  SocketInputAdapter
+ *Klasa  SocketInputAdapter.
  *
  * @author Lukasz Kot
  */
@@ -25,10 +25,11 @@ public class SocketInputAdapter implements InputAdapter {
 		private Socket socket = null;
 		private int port;
 		private ServerSocket serverSocket = null;
+		private boolean isConnected;
 		
 		/**
 		 * 
-		 * Inicjalizuje nowy obiekt SocketInputAdapter
+		 * Inicjalizuje nowy obiekt SocketInputAdapter.
 		 */
 		public SocketInputAdapter() {
 			super();
@@ -39,7 +40,7 @@ public class SocketInputAdapter implements InputAdapter {
 		 * 
 		 * @param log -przeczytany z loga.
 		 * @return zmienne typu boolean zwracajca prawde 
-         *     jezeli dodano do kolejki lub fa³sz w przypatku niepowodzenia
+         *     jezeli dodano do kolejki lub fa³sz w przypatku niepowodzenia.
 		 */
 	private boolean parseEvent(final String log) {
 		boolean readEvent = false;
@@ -95,6 +96,7 @@ SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 				break;
 			}
 			tDetails = log.substring(positionDetails);
+//			System.out.println(timestamp + " >> " + tDetails + " >> " + logLevel);
 			event = new Event(timestamp, tDetails, logLevel);
 			if (queue.acceptEvent(event)) { readEvent = true; } else { readEvent = false; }
 		}
@@ -102,30 +104,32 @@ SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 	}
 	
 	/**
-	 * Method awaits for the connection and
-	 * creates socket if connection is made.
+	 * Metoda oczekujaca na polaczenie i tworzaca socket w przypadku powodzenia.
 	 * 
-	 * @return true if connected to source
-	 * 			or false if not connected to source.
+	 * @return prawde jezeli podlaczony do zrodla i falusz jezeli nie podlaczony.
 	 */
 	public final boolean connectToSource() {
 		try {
+			isConnected = true;
 			serverSocket = new ServerSocket(port);
 			socket = serverSocket.accept();
 		} catch (IOException e) {
-			return false;
+			isConnected = true;
 		}
+		
 		if (socket != null)
-			return true;
+			isConnected = true;
 		else
-			return false;
+			isConnected = true;
+		
+		return isConnected;
 	}
 	
 	/**
-	 * Method reads line from socket and invokes method parseEvent.
 	 * 
-	 * @return true if method parseEvent returns true;
-	 * 			in any other case returns false.
+	 * Metoda wczytujaca linie z gniazda, nastepnie wywolujaca metode parseEvent.
+	 * 
+	 * @return prawde jezeli metoda parseEvent zwraca prawde, w innym przypadku falszu
 	 */
 	public final boolean readLog() {
 		boolean readEvent = false;
@@ -145,6 +149,7 @@ new InputStreamReader(socket.getInputStream()));
 				readEvent = false;
 			}
 			line = brinp.readLine();
+//			System.out.println(line);
 			if (line != null) {
 				if (parseEvent(line))
 					readEvent = true;
@@ -159,7 +164,7 @@ new InputStreamReader(socket.getInputStream()));
 	}
 
 	/**
-	 * Method closes Socket and ServerSocket objects.
+	 * Metoda zamykajsca Socket i obiekt ServerSocket.
 	 */
 	public final void closeSocket() {
 		try {
@@ -171,20 +176,21 @@ new InputStreamReader(socket.getInputStream()));
 	}
 	
 	/**
-	 * Method setups Configuration object.
+
+	 * Metoda konfiguracji obiektu  Configuration.
 	 * 
-	 * @param config - Configuration object.
+	 * @param config - obiekt Configuration.
 	 */
 	public final void setupConfig(final Configuration config) {
 		this.config = config;
 		port = config.getInputSocket();
-
+		isConnected = connectToSource();
 	}
 
 	/**
-	 * Method setups QueueManager object.
 	 * 
-	 * @param queue - QueueManager object
+	 * Metoda konfiguracji obiektu QueueManager.
+	 * @param queue - obiekt QueueManager
 	 */
 	public final void connectToQueueManager(final QueueManager queue) {
 		this.queue = queue;

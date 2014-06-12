@@ -36,20 +36,18 @@ public class FileInputAdapter implements InputAdapter {
 	}
 
 	/**
-	 * Returns Path from given String path.
+	 * Zwraca sciezke z String path.
 	 *
-	 * @param fileName
-	 *            full name of an existing, readable file
-	 * @return resulting Path from given String
+	 * @param fileName -  pelna nazwa 
+	 * @return zwraca otrzymany wynik
 	 */
 	private Path getPath(final String fileName) {
 		return Paths.get(fileName);
 	}
 
 	/**
-	 * Checks if given log file path exists.
-	 *
-	 * @return true if connected to source; false if not connected to source
+	 *Sprawdza, czy istnieje podana œcie¿ka w  pliku loga. 
+	 * @return true je¿eli pod³¹czono do Ÿród³a lub false jeœli nie pod³aczono.
 	 */
 	private boolean connectToSource() {
 		int connAttempts = 0;
@@ -69,7 +67,7 @@ public class FileInputAdapter implements InputAdapter {
 	}
 
 	/**
-	 * Reads log file line by line.
+	 * Czyta liniam plik logu.
 	 */
 	public boolean readLog() {
 		if (isConnected) {
@@ -99,12 +97,12 @@ public class FileInputAdapter implements InputAdapter {
 	}
 
 	/**
-	 * Parses line's content to Event.
+
+	 * Analizuje zawartoœæ lini do wydarzenia.
 	 *
-	 * @param log
-	 *            scanned line from log file
-	 * @return parsed Event object
-	 * or null if meets empty or invalid line in log file
+	 * @param log -  skanowana linia z pliku loga 
+	 * @return analizowany obiekt Event 
+     * lub niewazny, jeœli jest pusta lub nieprawid³ow¹ linia w pliku loga
 	 */
 	public final Event parseEvent(final String log) {
 		final Scanner scan = new Scanner(log);
@@ -153,32 +151,30 @@ public class FileInputAdapter implements InputAdapter {
 	}
 
 	/**
-	 * Formats given String log date.
+	 * Formatuje otrzymanya date z logu
 	 *
-	 * @param logDate
-	 *            String date to format
-	 * @return date in format compatible with Timestamp
+	 * @param logDate - data z logu do formatowania
+	 * @return data w formacie zgodnym z Timestamp
 	 */
 	private String dateReplace(final String logDate) {
 		return logDate.replaceAll("[(T)]", " ");
 	}
 
 	/**
-	 * Trims formated date.
+	 *Obiekt formatujacy date
 	 *
-	 * @param logDate
-	 *            date to trim
-	 * @return trimmed log date
+	 * @param logDate - data do sformatowania
+	 * 
+	 * @return - sformatowana datalogu
 	 */
 	private String dateTrim(final String logDate) {
 		return logDate.trim();
 	}
 
 	/**
-	 * Closes Scanner object.
+	 * Zamkniecie obiektu skanera.
 	 *
-	 * @param scan
-	 * 			  Scanner object to close
+	 * @param scan obiekt Scanner do zamkniêcia
 	 *
 	 */
 	public void closeScanner(final Scanner scan) {
@@ -186,10 +182,9 @@ public class FileInputAdapter implements InputAdapter {
 	}
 	
 	/**
-	 * Setups Configuration object.
+	 * Konfiguracja obiektu Configuration .
 	 *
-	 * @param configCon
-	 *            Configuration object
+	 * @param configCon obiekt Configuration 
 	 */
 	public void setupConfig(final Configuration configCon) {
 		config = configCon;
@@ -198,10 +193,9 @@ public class FileInputAdapter implements InputAdapter {
 	}
 
 	/**
-	 * Setups QueueManager object.
+	 * Obiekt konfiguracji QueueManager.
 	 *
-	 * @param queueMan
-	 *            QueueManager object
+	 * @param queueMan - obiekt QueueManager 
 	 */
 	public void connectToQueueManager(final QueueManager queueMan) {
 		this.queue = queueMan;
