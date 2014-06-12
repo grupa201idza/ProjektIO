@@ -34,43 +34,43 @@ public class Event {
 		};
 	}
 /**
- *Metoda zwracajaca znacznik czasowy
- * @return znacznik czasowy
+ *Metoda zwracajaca znacznik czasowy.
+ * @return znacznik czasowy.
  */
 	public Timestamp getTimestamp() {
 		return timestamp;
 	}
 /**
- *  ustawia znacznik czasowy
- * @param timestamp znacznik czasowy
+ *  Ustawia znacznik czasowy.
+ * @param timestamp znacznik czasowy.
  */
 	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
 	}
 /**
- * Zwraca lancuch zawierajacy szczegoly
- * @return szczegoly
+ * Zwraca lancuch zawierajacy szczegoly.
+ * @return szczegoly.
  */
 	public String getDetails() {
 		return details;
 	}
 /**
- * GEneracja szczegolow
- * @param details szczegoly
+ * Generacja szczegolow.
+ * @param details szczegoly.
  */
 	public void setDetails(String details) {
 		this.details = details;
 	}
 /**
- * Parametr zwracajacy poziom loga
- * @return poziom loga
+ * Parametr zwracajacy poziom loga.
+ * @return poziom loga.
  */
 	public Enum.LogLevel getLoglevel() {
 		return loglevel;
 	}
 /**
- * Generuje poziom loga
- * @param loglevel poziom loga
+ * Generuje poziom loga.
+ * @param loglevel poziom loga.
  */
 	public void setLoglevel(Enum.LogLevel loglevel) {
 		this.loglevel = loglevel;
