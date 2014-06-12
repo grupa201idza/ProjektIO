@@ -102,11 +102,9 @@ SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 	}
 	
 	/**
-	 * Method awaits for the connection and
-	 * creates socket if connection is made.
+	 * Metoda oczekujaca na polaczenie i tworzaca socket w przypadku powodzenia.
 	 * 
-	 * @return true if connected to source
-	 * 			or false if not connected to source.
+	 * @return prawde jezeli podlaczony do zrodla i falusz jezeli nie podlaczony.
 	 */
 	public final boolean connectToSource() {
 		try {
@@ -122,10 +120,10 @@ SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 	}
 	
 	/**
-	 * Method reads line from socket and invokes method parseEvent.
 	 * 
-	 * @return true if method parseEvent returns true;
-	 * 			in any other case returns false.
+	 * Metoda wczytujaca linie z gniazda, nastepnie wywolujaca metode parseEvent.
+	 * 
+	 * @return prawde jezeli metoda parseEvent zwraca prawde, w innym przypadku falszu
 	 */
 	public final boolean readLog() {
 		boolean readEvent = false;
@@ -159,7 +157,7 @@ new InputStreamReader(socket.getInputStream()));
 	}
 
 	/**
-	 * Method closes Socket and ServerSocket objects.
+	 * Metoda zamykajsca Socket i obiekt ServerSocket.
 	 */
 	public final void closeSocket() {
 		try {
@@ -171,9 +169,10 @@ new InputStreamReader(socket.getInputStream()));
 	}
 	
 	/**
-	 * Method setups Configuration object.
+
+	 * Metoda konfiguracji obiektu  Configuration.
 	 * 
-	 * @param config - Configuration object.
+	 * @param config - obiekt Configuration.
 	 */
 	public final void setupConfig(final Configuration config) {
 		this.config = config;
@@ -182,9 +181,9 @@ new InputStreamReader(socket.getInputStream()));
 	}
 
 	/**
-	 * Method setups QueueManager object.
 	 * 
-	 * @param queue - QueueManager object
+	 * Metoda konfiguracji obiektu QueueManager.
+	 * @param queue - obiekt QueueManager
 	 */
 	public final void connectToQueueManager(final QueueManager queue) {
 		this.queue = queue;
