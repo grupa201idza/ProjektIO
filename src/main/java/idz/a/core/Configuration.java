@@ -104,57 +104,57 @@ public class Configuration {
 		return outputFilePath;
 	}
 /**
- * 
- * @return
+ *  
+ * @return Zwraca gniazdo wejsciowe
  */
 	public int getInputSocket() {
 		return inputSocket;
 	}
 /**
  * 
- * @return
+ * @return Zwraca wejsciowy adres URl 
  */
 	public String getInputURL() {
 		return inputURL;
 	}
 /**
  * 
- * @return
+ * @return Zwraca wielkosc
  */
 	public int getBatchSize() {
 		return batchSize;
 	}
 /**
  * 
- * @return
+ * @return Zwraca login
  */
 	public String getDBLogin() {
 		return DBLogin;
 	}
 /**
  * 
- * @return
+ * @return Zwraca haslo.
  */
 	public String getDBPassword() {
 		return DBPassword;
 	}
 /**
  * 
- * @return
+ * @return Zwraca nazwe
  */
 	public String getDBName() {
 		return DBName;
 	}
 /**
  * 
- * @return
+ * @return Zwraca tabele
  */
 	public String getDBTable() {
 		return DBTable;
 	}
 /**
  * 
- * @return
+ * @return Zwraca port
  */ 
 	public int getDBPort() {
 		return DBPort;

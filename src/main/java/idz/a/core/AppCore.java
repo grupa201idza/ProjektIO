@@ -25,7 +25,7 @@ public class AppCore {
 	 * podstawie konfiguracji ustala rozmiar kolejki logow oraz wejsciowy i
 	 * wyjsciowy adapter wedlug nazwy.
 	 * 
-	 * @param path
+	 * @param path sciezka pliku
 	 */
 	public AppCore(String path) {
 		conf = new Configuration(path);
@@ -38,8 +38,7 @@ public class AppCore {
 	 * Tworzy obiekt adaptera implementujacego interface InputAdapter o zadanej
 	 * nazwie.
 	 * 
-	 * @param name
-	 *            nazwa interfejsu
+	 * @param name  nazwa interfejsu
 	 */
 	private static void loadInputAdapter(String name) {
 
@@ -57,8 +56,7 @@ public class AppCore {
 	 * Tworzy obiekt adaptera implementujacego interfejs Output InputAdapter o
 	 * zadanej nazwie
 	 * 
-	 * @param name
-	 *            nazwa parametru
+	 * @param name  nazwa parametru
 	 */
 	private static void loadOutputAdapter(String name) {
 
