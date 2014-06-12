@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- *Klasa  SocketInputAdapter
+ *Klasa  SocketInputAdapter.
  *
  * @author Lukasz Kot
  */
@@ -28,7 +28,7 @@ public class SocketInputAdapter implements InputAdapter {
 		
 		/**
 		 * 
-		 * Inicjalizuje nowy obiekt SocketInputAdapter
+		 * Inicjalizuje nowy obiekt SocketInputAdapter.
 		 */
 		public SocketInputAdapter() {
 			super();
@@ -39,7 +39,7 @@ public class SocketInputAdapter implements InputAdapter {
 		 * 
 		 * @param log -przeczytany z loga.
 		 * @return zmienne typu boolean zwracajca prawde 
-         *     jezeli dodano do kolejki lub fa³sz w przypatku niepowodzenia
+         *     jezeli dodano do kolejki lub fa³sz w przypatku niepowodzenia.
 		 */
 	private boolean parseEvent(final String log) {
 		boolean readEvent = false;
