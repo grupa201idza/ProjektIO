@@ -115,13 +115,13 @@ SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 			serverSocket = new ServerSocket(port);
 			socket = serverSocket.accept();
 		} catch (IOException e) {
-			connected = true;
+			connected = false;
 		}
 		
 		if (socket != null)
 			connected = true;
 		else
-			connected = true;
+			connected = false;
 		
 		return connected;
 	}
