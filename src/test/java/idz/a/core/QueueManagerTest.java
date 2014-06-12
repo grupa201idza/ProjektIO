@@ -1,10 +1,11 @@
 package idz.a.core;
 
 import idz.a.core.QueueManager;
-
 import idz.a.core.Configuration;
+import idz.a.output.OutputAdapter;
 
 import java.lang.String;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -23,8 +24,32 @@ public class QueueManagerTest {
 	
 	QueueManager manager = new QueueManager();
 	
-	private String exampleString = "Example";
+	private String exampleString = "Example details";
 	
+	/**
+	 * 
+	 * Klasa implementujaca "pusty" adapter wyjsciowy
+	 * niezbedny do dzialania metody sendEvents
+	 *
+	 */
+	
+	private class OutputTest implements OutputAdapter {
+
+		@Override
+		public void setupConfig(Configuration config) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public boolean storeEvents(List<Event> batch) {
+			// TODO Auto-generated method stub
+			return true;
+		}
+		
+	}
+	
+	OutputTest OT = new OutputTest();
 	
 	@Test
 	
@@ -144,6 +169,13 @@ public class QueueManagerTest {
 		manager.setBatchSize(conf.getBatchSize());
 	
 		/**
+		 * Przypisanie adaptera do managera kolejki
+		 */
+		
+		manager.output = OT;
+		
+		
+		/**
 		 * Tworzenie 10 przykladowych obiektow klasy Event
 		 */
 	
@@ -161,9 +193,7 @@ public class QueueManagerTest {
 		
 			manager.acceptEvent(sample[t3]);
 			
-		}
-		
-		manager.sendEvents();
+		}	
 		
 		/**
 		 * Kluczowy moment testu:
@@ -172,6 +202,7 @@ public class QueueManagerTest {
 		 * Oczekiwana ilosc obiektow typu Event po wywolaniu metody: 0
 		 */
 	
+		manager.sendEvents();
 		assertEquals("Number of Events must be 0", 0, manager.currentSize());
 		
 	}

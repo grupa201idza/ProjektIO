@@ -25,6 +25,7 @@ public class SocketInputAdapter implements InputAdapter {
 		private Socket socket = null;
 		private int port;
 		private ServerSocket serverSocket = null;
+		private boolean isConnected;
 		
 		/**
 		 * 
@@ -95,6 +96,7 @@ SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 				break;
 			}
 			tDetails = log.substring(positionDetails);
+//			System.out.println(timestamp + " >> " + tDetails + " >> " + logLevel);
 			event = new Event(timestamp, tDetails, logLevel);
 			if (queue.acceptEvent(event)) { readEvent = true; } else { readEvent = false; }
 		}
@@ -108,15 +110,19 @@ SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 	 */
 	public final boolean connectToSource() {
 		try {
+			isConnected = true;
 			serverSocket = new ServerSocket(port);
 			socket = serverSocket.accept();
 		} catch (IOException e) {
-			return false;
+			isConnected = true;
 		}
+		
 		if (socket != null)
-			return true;
+			isConnected = true;
 		else
-			return false;
+			isConnected = true;
+		
+		return isConnected;
 	}
 	
 	/**
@@ -143,6 +149,7 @@ new InputStreamReader(socket.getInputStream()));
 				readEvent = false;
 			}
 			line = brinp.readLine();
+//			System.out.println(line);
 			if (line != null) {
 				if (parseEvent(line))
 					readEvent = true;
@@ -177,7 +184,7 @@ new InputStreamReader(socket.getInputStream()));
 	public final void setupConfig(final Configuration config) {
 		this.config = config;
 		port = config.getInputSocket();
-
+		isConnected = connectToSource();
 	}
 
 	/**

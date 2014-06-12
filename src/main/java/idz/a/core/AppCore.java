@@ -73,8 +73,8 @@ public class AppCore {
 
 	/**
 	 * Wykorzystuje metody ladujace adapter wejsciowy i wyjsciowy ze sciezki o
-	 * zadanej nazwie i powoduje nowa instancj�ｿｽ�ｽｿ�ｽｽ instancj�ｿｽ menadzera
-	 * kolejki
+	 * zadanej nazwie i powoduje nowa instancj�ｿｽ�ｽｿ�ｽｽ�ｿｽ�ｽｽ�ｽｿ�ｿｽ�ｽｽ�ｽｽ
+	 * instancj�ｿｽ�ｽｿ�ｽｽ menadzera kolejki
 	 * */
 	private static void setUp() {
 		loadInputAdapter("idz.a.input." + inputName);
@@ -108,7 +108,7 @@ public class AppCore {
 			if (countIn > 10 || countOut > 10)
 				break;
 
-			while (queue.currentSize() < batchSize && countIn <=11) {
+			while (queue.currentSize() < batchSize && countIn <= 11) {
 
 				if (!in.readLog()) {
 					try {
@@ -117,13 +117,16 @@ public class AppCore {
 						e.printStackTrace();
 					}
 					countIn++;
+					System.out.println("No file or EOF, " + (11 - countIn)
+							+ " more retries(y)");
 				} else
 					countIn = 0;
 			}
 
-			System.out.println("Queue is full");
+			if (queue.currentSize() == batchSize)
+				System.out.println("Queue is full");
 
-			if (queue.currentSize() >= 0) {
+			if (queue.currentSize() > 0) {
 				if (!queue.sendEvents()) {
 					try {
 						Thread.sleep(1500);
@@ -131,10 +134,14 @@ public class AppCore {
 						e.printStackTrace();
 					}
 					countOut++;
+					if ((11 - countOut) > 0)
+						System.out.println("No connection, " + (11 - countOut)
+								+ " more retries(y)");
 				} else
 					countOut = 0;
 			} else
 				System.out.println("Queue is empty");
 		}
+		System.out.println("Closing application");
 	}
 }
