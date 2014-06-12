@@ -99,8 +99,8 @@ public class FileOutputAdapter implements OutputAdapter {
 		return false;
 	}
 	/**
-	 * checks file existence if file is non-existent creates it
-	 * @return succes or fail with creating connection with existing file
+	 * Sprawdza, czy plik istnienie pliku nie istnieje tworzy go 
+	 * @return sukces lub porazke tworzenia polaczenia z plikiem
 	 */
 	boolean connectToDestination(){
 		storageFile = new File(outputFilePath);
