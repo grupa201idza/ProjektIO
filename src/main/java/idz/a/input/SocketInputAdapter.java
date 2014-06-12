@@ -109,20 +109,21 @@ SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 	 * @return prawde jezeli podlaczony do zrodla i falusz jezeli nie podlaczony.
 	 */
 	public final boolean connectToSource() {
+		boolean connected = false;
 		try {
-			isConnected = true;
+			connected = true;
 			serverSocket = new ServerSocket(port);
 			socket = serverSocket.accept();
 		} catch (IOException e) {
-			isConnected = true;
+			connected = true;
 		}
 		
 		if (socket != null)
-			isConnected = true;
+			connected = true;
 		else
-			isConnected = true;
+			connected = true;
 		
-		return isConnected;
+		return connected;
 	}
 	
 	/**
