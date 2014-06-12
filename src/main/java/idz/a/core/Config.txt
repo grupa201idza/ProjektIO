@@ -1,11 +1,11 @@
 #1. ADAPTERS
 InputAdapter=FileInputAdapter
-OutputAdapter=DBOutputAdapter
+OutputAdapter=FileOutputAdapter
 #2. VALUES
 inputFilePath=server.log.1
 inputSocket=0
 inputURL=0.0.0.0
-outputFilePath=path://out/path
+outputFilePath=plik
 DBLogin=login
 DBPassword=password
 DBPort=0

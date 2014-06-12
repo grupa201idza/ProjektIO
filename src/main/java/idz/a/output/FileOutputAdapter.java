@@ -29,7 +29,7 @@ public class FileOutputAdapter implements OutputAdapter {
 	 * konstruktor adaptera
 	 */
 
-	FileOutputAdapter(Configuration config){
+	public FileOutputAdapter(){
 		//setupConfig(config);
 	}
 	
