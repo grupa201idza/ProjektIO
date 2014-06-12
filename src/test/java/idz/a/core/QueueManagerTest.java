@@ -31,7 +31,7 @@ public class QueueManagerTest {
 	/**
 	 * Test metody acceptEvent klasy QuereManager
 	 * Test 1:
-	 * Przypadek, w którym aktualna ilosc batchy jest mniejsza od ilosci maksymalnej.
+	 * Przypadek, w ktorym aktualna ilosc batchy jest mniejsza od ilosci maksymalnej.
 	 * Oczekiwany rezultat:
 	 * Zwrocona wartosc typu boolean: true 
 	 */
@@ -79,7 +79,7 @@ public class QueueManagerTest {
 	/**
 	 * Test metody acceptEvent klasy QuereManager
 	 * Test 2:
-	 * Przypadek, w którym aktualna ilosc batchy jest wype³niona do ilosci maksymalnej,
+	 * Przypadek, w ktorym aktualna ilosc batchy jest wypelniona do ilosci maksymalnej,
 	 * i dochodzi nastepny Event.
 	 * Oczekiwany rezultat:
 	 * Zwrocona wartosc typu boolean: false 
@@ -129,7 +129,7 @@ public class QueueManagerTest {
 	/**
 	 * Test metody sendEvents klasy QuereManager
 	 * Test 3:
-	 * Przypadek, w którym kolejka zostaje zapelniona,
+	 * Przypadek, w ktorym kolejka zostaje zapelniona,
 	 * poczym dziala metoda sendEvents.
 	 * Oczekiwany rezultat:
 	 * Ilosc Eventow po dzialaniu metody sendEvents wynosi 0
@@ -172,7 +172,7 @@ public class QueueManagerTest {
 		 * Oczekiwana ilosc obiektow typu Event po wywolaniu metody: 0
 		 */
 	
-		assertEquals("Number of Events must be 0", null, manager.currentSize());
+		assertEquals("Number of Events must be 0", 0, manager.currentSize());
 		
 	}
 	
