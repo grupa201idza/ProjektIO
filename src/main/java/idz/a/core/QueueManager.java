@@ -12,8 +12,8 @@ import idz.a.output.OutputAdapter;
 
 
 /** 
- * Tworzy liste w formie tablicy o okre徑onym rozmiarze, domy從ie tablica ma rozmiar zero
- * Posiada wska殤ik na adapter wyj彡iowy.
+ * Tworzy liste w formie tablicy o okreslonymonym rozmiarze, domysnie tablica ma rozmiar zero.
+ * Posiada wskaznik na adapter wysciowy.
  *  */
 public class QueueManager {
 
@@ -53,8 +53,8 @@ public class QueueManager {
 			return false;
 	}
 	/**
-	 * Wysyｳa wydarzenie i zwraca informacje o powodzeniu.
-	 * @return wartocs boolean czy sie udalo.
+	 * Wysyla wydarzenie i zwraca informacje o powodzeniu.
+	 * @return wartoss boolean czy sie udalo.
 	 */
 	public boolean sendEvents() {
 		if (output.storeEvents(queue)) {
@@ -71,7 +71,7 @@ public class QueueManager {
 	}
 	/**
 	 * 
-	 * @return rozmiar kolejki.
+	 * @return Zwraca rozmiar kolejki.
 	 */
 	public int currentSize() {
 		return queue.size();
