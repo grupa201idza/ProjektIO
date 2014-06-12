@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * SocketInputAdapter class.
+ *Klasa  SocketInputAdapter
  *
  * @author Lukasz Kot
  */
@@ -27,17 +27,19 @@ public class SocketInputAdapter implements InputAdapter {
 		private ServerSocket serverSocket = null;
 		
 		/**
-		 * Initializes new SocketInputAdapter object.
+		 * 
+		 * Inicjalizuje nowy obiekt SocketInputAdapter
 		 */
 		public SocketInputAdapter() {
 			super();
 		}
 		/**
-		 * Method parses line's content and adds event to queue.
 		 * 
-		 * @param log - read line from socket.
-		 * @return true if added to queue or
-		 * 			false if not added to queue.
+		 * Metoda analizuje zawartoœæ linii i dodaje zdarzenie do kolejki.
+		 * 
+		 * @param log -przeczytany z loga.
+		 * @return zmienne typu boolean zwracajca prawde 
+         *     jezeli dodano do kolejki lub fa³sz w przypatku niepowodzenia
 		 */
 	private boolean parseEvent(final String log) {
 		boolean readEvent = false;
