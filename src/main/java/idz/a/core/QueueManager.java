@@ -12,8 +12,8 @@ import idz.a.output.OutputAdapter;
 
 
 /** 
- * Tworzy liste w formie tablicy o okreœlonym rozmiarze, domyœnie tablica ma rozmiar zero
- * Posiada wskaŸnik na adapter wyjœciowy.
+ * Tworzy liste w formie tablicy o okreå¾‘onym rozmiarze, domyå¾žie tablica ma rozmiar zero
+ * Posiada wskaæ®¤ik na adapter wyjå½¡iowy.
  *  */
 public class QueueManager {
 
@@ -41,8 +41,8 @@ public class QueueManager {
 	}
 	
 	/** 
-	 * Akceptuje wydarzenie i informacjê o w formie zmiennej boolean o
-	 *  powodzeniu lub pora¿ce.
+	 * Akceptuje wydarzenie i informacjï¿½ o w formie zmiennej boolean o
+	 *  powodzeniu lub poraï½¿ce.
 	 *  @return powodzenie lub porazka.
 	 *  */
 	public boolean acceptEvent(Event event) {
@@ -53,7 +53,7 @@ public class QueueManager {
 			return false;
 	}
 	/**
-	 * Wysy³a wydarzenie i zwraca informacje o powodzeniu.
+	 * Wysyï½³a wydarzenie i zwraca informacje o powodzeniu.
 	 * @return wartocs boolean czy sie udalo.
 	 */
 	public boolean sendEvents() {
@@ -67,7 +67,7 @@ public class QueueManager {
 	 * Usuwa wydarzenie.
 	 */
 	private void removeEvents() {
-		queue.remove(0);
+		queue.clear();
 	}
 	/**
 	 * 
