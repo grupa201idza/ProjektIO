@@ -59,7 +59,7 @@ public class FileOutputAdapter implements OutputAdapter {
 	@Override
 	/**
 	Sprawdza czy pliki istnieje, je¿eli nie tworzy go. Pozniej dopisuje logi do pliku
-	@return 
+	* @return czy polaczenie sie udalo
 	*/
 	public boolean storeEvents(List<Event> batch) {
 		if(connectToDestination())
