@@ -44,7 +44,7 @@ public class AppCore {
 	private static void loadInputAdapter(String name) {
 
 		try {
-			Class input = Class.forName(name);
+			Class<?> input = Class.forName(name);
 			in = (InputAdapter) input.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
@@ -63,7 +63,7 @@ public class AppCore {
 	private static void loadOutputAdapter(String name) {
 
 		try {
-			Class output = Class.forName(name);
+			Class<?> output = Class.forName(name);
 			out = (OutputAdapter) output.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
@@ -75,7 +75,8 @@ public class AppCore {
 
 	/**
 	 * Wykorzystuje metody ladujace adapter wejsciowy i wyjsciowy ze sciezki o
-	 * zadanej nazwie i powoduje nowa instancj�ｿｽ instancj� menadzera kolejki
+	 * zadanej nazwie i powoduje nowa instancj�ｿｽ�ｽｿ�ｽｽ instancj�ｿｽ menadzera
+	 * kolejki
 	 * */
 	private static void setUp() {
 		loadInputAdapter("idz.a.input." + inputName);
@@ -108,7 +109,9 @@ public class AppCore {
 		while (true) {
 			if (countIn > 10 || countOut > 10)
 				break;
-			if (queue.currentSize() < batchSize) {
+
+			while (queue.currentSize() < batchSize && countIn <=11) {
+
 				if (!in.readLog()) {
 					try {
 						Thread.sleep(1500);
@@ -118,9 +121,11 @@ public class AppCore {
 					countIn++;
 				} else
 					countIn = 0;
-			} else
-				System.out.println("Queue is full");
-			if (queue.currentSize() > 0) {
+			}
+
+			System.out.println("Queue is full");
+
+			if (queue.currentSize() >= 0) {
 				if (!queue.sendEvents()) {
 					try {
 						Thread.sleep(1500);
