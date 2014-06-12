@@ -32,7 +32,7 @@ public class DBOutputAdapter implements OutputAdapter {
 
 	@Override
 	/**
-	 * Pobiera z konfiguracji dane dla funkcjonowania adaptera
+	 * Pobiera z konfiguracji dane dla funkcjonowania adaptera.
 	 */
 	public void setupConfig(Configuration config) {
 		  login = config.getDBLogin(); 
@@ -44,7 +44,7 @@ public class DBOutputAdapter implements OutputAdapter {
 
 	@Override
 	/**
-	 * Wstawia w tabelê logow nowy wiersz zawierajacy dane loga
+	 * Wstawia w tabelê logow nowy wiersz zawierajacy dane loga.
 	 *  @return wynik
 	 */
 	public boolean storeEvents(List<Event> batch) {
